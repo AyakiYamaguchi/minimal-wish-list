@@ -1,0 +1,40 @@
+@import './variables.scss';
+
+.formItem {
+  &__wrapper {
+    margin-bottom: 25px;
+  }
+
+  &__label {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: $keyColorHeavy;
+    margin-bottom: 10px;
+  }
+
+  &__input {
+    width: 100%;
+    background-color: #F5F8FF;
+    border-radius: 7px;
+    font-size: 1.4rem;
+    padding: 14px 17px;
+  }
+
+  &__input:focus {
+    border: 2px solid $keyColorMedium;
+  }
+
+  &__error_message {
+    color: $errorColorMedium;
+    font-size: 1.3rem;
+    margin-top: 5px;
+    padding: 10px 17px;
+    border-radius: 7px;
+    background-color: $errorColorLight;
+  }
+
+  &__button_wrapper {
+    text-align: center;
+  }
+}

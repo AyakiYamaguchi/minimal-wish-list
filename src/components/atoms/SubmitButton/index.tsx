@@ -1,4 +1,5 @@
 import React, {FC} from 'react';
+import Style from './SubmitButton.module.scss';
 
 type Props = {
   btnText: string;
@@ -7,7 +8,7 @@ type Props = {
 const SubmitButton:FC<Props> = ({btnText}) => {
   return (
     <div>
-      { btnText }
+      <button type="submit" className={Style.submitBtn}>{ btnText }</button>
     </div>
   )
 }
