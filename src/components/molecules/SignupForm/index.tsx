@@ -1,5 +1,5 @@
 import React from 'react'
-import { ErrorMessage, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Style from '../../../styles/form_common_styles.module.scss';
 import SubmitButton from '../../atoms/SubmitButton';
