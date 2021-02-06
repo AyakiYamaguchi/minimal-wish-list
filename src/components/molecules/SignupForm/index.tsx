@@ -25,11 +25,6 @@ const SignupForm = () => {
       .required('確認用パスワードは必須です'),
   })
 
-  const setUser = (user: User) => {
-    setAuthState({type: SET_USER, payload: {user: user}})
-    history.push('/wishlist')
-  }
-
   const handleAuthError = (errorCode: string) => {
     switch (errorCode) {
       case "auth/email-already-in-use":
@@ -57,7 +52,8 @@ const SignupForm = () => {
               uid: result.user.uid,
               displayName: null,
             }
-            setUser(user)
+            setAuthState({type: SET_USER, payload: {user: user}})
+            history.push('/wishlist')
           }
         })
         .catch((error)=>{

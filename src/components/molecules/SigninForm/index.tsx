@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useHistory } from 'react-router-dom';
 import Style from '../../../styles/form_common_styles.module.scss';
 import SubmitButton from '../../atoms/SubmitButton';
-
+import { SignInWithEmailAndPassword } from '../../../apis/FirebaseAuth';
+import { AuthContext , SET_USER, User } from '../../../store/Auth';
 
 const SigninForm = () => {
+  const { setAuthState } = useContext(AuthContext)
+  const [ error, setError ] = useState('')
+  const history = useHistory()
 
   const validation = Yup.object({
     email: Yup.string()
@@ -17,6 +22,17 @@ const SigninForm = () => {
       .required('パスワードは必須です'),
   })
 
+  const handleAuthError = (errorCode: string) => {
+    switch (errorCode) {
+      case "auth/wrong-password":
+        setError('メールアドレスまたはパスワードに誤りがあります')
+        break;
+      default:
+        setError('エラーが発生しました。しばらくしてから再度お試しください')
+        console.log(errorCode)
+    }
+  }
+
   const formik = useFormik({
     initialValues: {
       email:'',
@@ -24,12 +40,28 @@ const SigninForm = () => {
     },
     validationSchema: validation,
     onSubmit: values => {
-      alert(values)
+      SignInWithEmailAndPassword(values.email, values.password)
+        .then((result)=>{
+          console.log(result)
+          if(result.user){
+            const user = {
+              uid: result.user.uid,
+              displayName: null,
+            }
+            setAuthState({type: SET_USER, payload: {user: user}})
+            history.push('/wishlist')
+          }
+        })
+        .catch((error)=>{
+          handleAuthError(error.code)
+          console.log(error)
+        })
     },
       
   })
   return (
     <div>
+      { error && <div className={Style.formItem__error_message}>{error}</div> }
       <form onSubmit={formik.handleSubmit}>
         <div className={Style.formItem__wrapper}>
           <label htmlFor="email" className={Style.formItem__label}>メールアドレス</label>

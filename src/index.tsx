@@ -4,7 +4,7 @@ import './index.css';
 import './styles/reset.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { AuthProvider } from './store/Auth'
+import { AuthProvider } from './store/Auth';
 
 ReactDOM.render(
   <React.StrictMode>
