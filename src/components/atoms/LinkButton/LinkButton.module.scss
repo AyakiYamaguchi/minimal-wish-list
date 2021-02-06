@@ -1,0 +1,13 @@
+@import '../../../styles/variables';
+
+
+.button {
+  width: 80%;
+  height: 55px;
+  text-align: center;
+  background-color: white;
+  border-radius: 30px;
+  color: $fontColorBlack;
+  font-size: 1.4rem;
+  box-shadow: 0px 3px 5px rgba(20, 1, 88, 0.1);
+}

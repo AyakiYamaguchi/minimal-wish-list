@@ -1,0 +1,29 @@
+@import '../../../styles/variables';
+
+.background_img {
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+  background-image: url("../../../images/TopPage_background_img.jpg");
+  background-size: cover;
+  background-position: 50%;
+}
+
+// .background_color {
+//   height: 100vh;
+//   width: 100vw;
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+//   bottom: 0;
+//   left: 0;
+//   background-color: rgba(255, 255, 255, 0.6);
+// }
+
+.content_wrapper {
+  padding-top: 100px;
+}
+
+.button_wrapper {
+  padding-top: 30px;
+}
