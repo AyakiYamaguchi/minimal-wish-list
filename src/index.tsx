@@ -5,11 +5,14 @@ import './styles/reset.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './store/Auth';
+import { StoreProvider } from './store';
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
-      <App />
+      <StoreProvider>
+        <App />
+      </StoreProvider>
     </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root')

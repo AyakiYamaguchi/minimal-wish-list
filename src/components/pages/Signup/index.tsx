@@ -1,5 +1,5 @@
 import React from 'react'
-import SignupForm from '../../molecules/SignupForm'
+import SignupForm from '../../organisms/SignupForm'
 
 
 const Signup = () => {

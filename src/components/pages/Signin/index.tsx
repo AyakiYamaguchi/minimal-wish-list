@@ -1,5 +1,5 @@
 import React from 'react'
-import SigninForm from '../../molecules/SigninForm'
+import SigninForm from '../../organisms/SigninForm'
 
 const Signin = () => {
   return (
