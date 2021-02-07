@@ -6,10 +6,12 @@ import TopPage from './components/pages/TopPage';
 import WishLists from './components/pages/WishLists';
 import Signup from './components/pages/Signup';
 import Signin from './components/pages/Signin';
+import PrivateRoute from './components/templates/PrivateRoute';
 
 function App() {
   return (
     <Router>
+      <PrivateRoute />
       <Switch>
         <Route exact path="/top">
           <TopPage />
