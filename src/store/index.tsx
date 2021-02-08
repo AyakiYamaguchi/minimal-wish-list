@@ -5,7 +5,7 @@ export type WishList = {
   discardListId: string;
   data: {
     listName: string;
-    icon_id: string;
+    iconId: string;
     priority: number;
     status: string;
     createdAt: Date;
@@ -18,7 +18,7 @@ export type DiscardList = {
   wishListId?: string;
   data: {
     listName: string;
-    icon_id: string;
+    iconId: string;
     priority: number;
     status: string;
     createdAt: Date;
@@ -59,6 +59,15 @@ const reducer = (state: State, action: Action ) => {
   switch(action.type){
     case 'SET_WISH_LISTS':
       return { ...state, wishLists: action.payload.wishLists }
+    case 'UPDATE_WISH_LIST':
+      const wishList = action.payload.wishList
+      const updatedWishLists = state.wishLists.map((list)=>{
+        if(list.id === wishList.id){
+          return wishList
+        }
+        return list
+      })
+      return { ...state, wishLists: updatedWishLists}
     default:
       return state
   }

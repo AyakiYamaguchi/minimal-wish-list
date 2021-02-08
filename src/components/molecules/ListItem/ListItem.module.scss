@@ -1,0 +1,13 @@
+@import '../../../styles/variables';
+
+.list_wrapper {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $baseColorGrayMedium;
+  padding: 15px 15px;
+}
+
+.list_name {
+  font-size: 1.4rem;
+  margin-left: 10px;
+}

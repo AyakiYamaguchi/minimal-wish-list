@@ -53,7 +53,7 @@ const SignupForm = () => {
               displayName: null,
             }
             setAuthState({type: SET_USER, payload: {user: user}})
-            history.push('/wishlist')
+            history.push('/wish-lists')
           }
         })
         .catch((error)=>{

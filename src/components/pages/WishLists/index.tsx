@@ -25,13 +25,19 @@ const WishLists = () => {
         console.log(error)
       })
   }
+
+  const sortedWisthLists = globalState.wishLists.sort((a,b)=>{
+    if(a.data.priority < b.data.priority) return -1;
+    if(a.data.priority > b.data.priority) return 1;
+    return 0;
+  })
+  
   useEffect(()=>{
     setWishLists()
-  },[])
+  },[AuthState.user.uid])
   return (
     <div>
-      <DraggableLists />
-      <button onClick={setWishLists}>リスト取得</button>
+      <DraggableLists wishLists={sortedWisthLists}/>
     </div>
   )
 }
