@@ -1,9 +1,9 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import ListItem from '../../molecules/ListItem';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { StoreContext, WishList, UPDATE_WISH_LIST } from '../../../store/index';
 import { AuthContext } from '../../../store/Auth';
-import { updateWishList } from '../../../apis/FirebaseWishList';
+import { updateWishListPriority } from '../../../apis/FirebaseWishList';
 
 type Props = {
   wishLists: WishList[]
@@ -14,6 +14,7 @@ const DraggableLists:FC<Props> = ({wishLists}) => {
   const [DraggableWishLists, setDraggableWishLists] = useState(wishLists);
   const {AuthState} = useContext(AuthContext);
   const onDragEnd = (result:any) => {
+    console.log('-----並び替え前-----')
     console.log(result)
     // 並び替えされていない場合
     if(!result.destination){
@@ -27,21 +28,31 @@ const DraggableLists:FC<Props> = ({wishLists}) => {
     const [reorderedItems] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItems)
 
+    let updatedWishLists = []
     items.map((list, index)=>{
       const currentPriority = index + 1
       if(list.data.priority !== currentPriority){
-        updateWishList(AuthState.user.uid, list.id, currentPriority)
+        updateWishListPriority(AuthState.user.uid, list.id, currentPriority)
           .then(()=>{
-            setGlobalState({type: UPDATE_WISH_LIST, payload:{wishList: list}})
+            const wishList = {...list, data: {...list.data , priority: currentPriority }}
+            setGlobalState({type: UPDATE_WISH_LIST, payload:{wishList: wishList}})
+            updatedWishLists.push(wishLists)
+            console.log(wishList)
           }).catch((error)=>{
             alert(error)
           })
       }
     })
     setDraggableWishLists(items)
+    console.log('-----並び替え後-----')
     console.log(items)
   }
-  
+  useEffect(()=>{
+    setDraggableWishLists(wishLists)
+    console.log('state更新後')
+    console.log(wishLists)
+  },[wishLists])
+  if (!DraggableWishLists) { return }
   return (
     <div>
       <DragDropContext onDragEnd={onDragEnd}>

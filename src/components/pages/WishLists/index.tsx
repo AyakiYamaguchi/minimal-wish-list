@@ -18,7 +18,6 @@ const WishLists = () => {
             discardListId: list.data().discardListId,
           }
           wishLists.push(wishList)
-          console.log(list.data())
         })
         setGlobalState({type: SET_WISH_LISTS, payload: {wishLists: wishLists}})
       }).catch((error)=>{
@@ -38,6 +37,8 @@ const WishLists = () => {
   return (
     <div>
       <DraggableLists wishLists={sortedWisthLists}/>
+      {console.log('------sorted-----')}
+      {console.log(sortedWisthLists)}
     </div>
   )
 }
