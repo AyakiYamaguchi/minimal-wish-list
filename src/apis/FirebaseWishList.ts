@@ -7,6 +7,22 @@ export const fetchWishLists = async(userId: string) => {
   return await wishListsRef.orderBy('data.priority','asc').get();
 }
 
+export const createWishList = async(userId: string, listName: string, iconId: string, discardListId: string) => {
+  const wishListsRef = db.collection('users').doc(userId).collection('wishLists')
+  const wishListsLength =  await wishListsRef.get().then(result=> { return result.size})
+  return await wishListsRef.add({
+    discardListId: discardListId,
+    data: {
+      listName: listName,
+      iconId: iconId,
+      priority: wishListsLength + 1,
+      status: '',
+      createdAt: firebase.firestore.Timestamp.now(),
+      updatedAt: firebase.firestore.Timestamp.now(),
+    }
+  })
+}
+
 export const createOrUpdateWishList = async(userId: string, currentWishListId: string, wishList: WishList) => {
   const wishListsRef = db.collection('users').doc(userId).collection('wishLists')
   if (!currentWishListId) {
@@ -43,3 +59,5 @@ export const updateWishListPriority = async(userId: string, listId: string, prio
 export const deleteWishList = (userId: string) => {
   
 }
+
+

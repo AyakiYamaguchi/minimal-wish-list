@@ -1,18 +1,15 @@
-import React, { FC, useContext, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import ListItem from '../../molecules/ListItem';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { StoreContext, WishList, UPDATE_WISH_LIST } from '../../../store/index';
-import { AuthContext } from '../../../store/Auth';
-import { updateWishListPriority } from '../../../apis/FirebaseWishList';
+import { WishList } from '../../../store/index';
 
 type Props = {
-  wishLists: WishList[]
+  wishLists: WishList[];
+  reorderWishList: Function;
 }
 
-const DraggableLists:FC<Props> = ({wishLists}) => {
-  const {setGlobalState} = useContext(StoreContext);
-  const [DraggableWishLists, setDraggableWishLists] = useState(wishLists);
-  const {AuthState} = useContext(AuthContext);
+const DraggableLists:FC<Props> = ({wishLists, reorderWishList}) => {
+
   const onDragEnd = (result:any) => {
     console.log('-----並び替え前-----')
     console.log(result)
@@ -24,35 +21,12 @@ const DraggableLists:FC<Props> = ({wishLists}) => {
     if (result.destination.index === result.source.index) {
       return;
     }
-    const items = Array.from(DraggableWishLists);
+    const items = Array.from(wishLists);
     const [reorderedItems] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItems)
 
-    let updatedWishLists = []
-    items.map((list, index)=>{
-      const currentPriority = index + 1
-      if(list.data.priority !== currentPriority){
-        updateWishListPriority(AuthState.user.uid, list.id, currentPriority)
-          .then(()=>{
-            const wishList = {...list, data: {...list.data , priority: currentPriority }}
-            setGlobalState({type: UPDATE_WISH_LIST, payload:{wishList: wishList}})
-            updatedWishLists.push(wishLists)
-            console.log(wishList)
-          }).catch((error)=>{
-            alert(error)
-          })
-      }
-    })
-    setDraggableWishLists(items)
-    console.log('-----並び替え後-----')
-    console.log(items)
+    reorderWishList(items)
   }
-  useEffect(()=>{
-    setDraggableWishLists(wishLists)
-    console.log('state更新後')
-    console.log(wishLists)
-  },[wishLists])
-  if (!DraggableWishLists) { return }
   return (
     <div>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -61,7 +35,7 @@ const DraggableLists:FC<Props> = ({wishLists}) => {
             (provided)=> (
               <ul {...provided.droppableProps} ref={provided.innerRef}>
                 {
-                  DraggableWishLists.map((list,index)=>{
+                  wishLists.map((list,index)=>{
                     
                     return(
                       <Draggable key={list.id} draggableId={list.id} index={index}>

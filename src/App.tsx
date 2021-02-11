@@ -7,6 +7,7 @@ import WishLists from './components/pages/WishLists';
 import Signup from './components/pages/Signup';
 import Signin from './components/pages/Signin';
 import PrivateRoute from './components/templates/PrivateRoute';
+import CreateWishList from './components/pages/CreateWishList';
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
         </Route>
         <Route exact path="/signin">
           <Signin />
+        </Route>
+        <Route exact path="/create-wishlist">
+          <CreateWishList />
         </Route>
       </Switch>
     </Router>
