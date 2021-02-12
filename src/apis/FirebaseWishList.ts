@@ -7,6 +7,11 @@ export const fetchWishLists = async(userId: string) => {
   return await wishListsRef.orderBy('data.priority','asc').get();
 }
 
+export const fetchWishListDetail = async(userId: string, listId: string) => {
+  const wishListRef = db.collection('users').doc(userId).collection('wishLists').doc(listId);
+  return await wishListRef.get()
+}
+
 export const createWishList = async(userId: string, listName: string, iconId: string, discardListId: string) => {
   const wishListsRef = db.collection('users').doc(userId).collection('wishLists')
   const wishListsLength =  await wishListsRef.get().then(result=> { return result.size})

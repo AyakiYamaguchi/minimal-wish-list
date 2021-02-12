@@ -8,6 +8,7 @@ import Signup from './components/pages/Signup';
 import Signin from './components/pages/Signin';
 import PrivateRoute from './components/templates/PrivateRoute';
 import CreateWishList from './components/pages/CreateWishList';
+import WishListDetail from './components/pages/WishListDetail';
 
 function App() {
   return (
@@ -17,14 +18,17 @@ function App() {
         <Route exact path="/top">
           <TopPage />
         </Route>
-        <Route exact path="/wish-lists">
-          <WishLists />
-        </Route>
         <Route exact path="/signup">
           <Signup />
         </Route>
         <Route exact path="/signin">
           <Signin />
+        </Route>
+        <Route exact path="/wish-lists">
+          <WishLists />
+        </Route>
+        <Route exact path="/wish-lists/:id">
+          <WishListDetail />
         </Route>
         <Route exact path="/create-wishlist">
           <CreateWishList />

@@ -39,7 +39,7 @@ const WishLists = () => {
           updateWishListPriority(AuthState.user.uid, list.id, currentPriority)
           .then(()=>{
             const wishList = {...list, data: {...list.data , priority: currentPriority }}
-            // setGlobalState({type: UPDATE_WISH_LIST, payload:{wishList: wishList}})
+            setGlobalState({type: UPDATE_WISH_LIST, payload:{wishList: wishList}})
             updatedWishLists.push(wishList)
             console.log(wishList)
             console.log('--------')
@@ -51,7 +51,7 @@ const WishLists = () => {
       }
     })
     console.log(updatedWishLists)
-    setGlobalState({type: SET_WISH_LISTS, payload: {wishLists: updatedWishLists}})
+    // setGlobalState({type: SET_WISH_LISTS, payload: {wishLists: updatedWishLists}})
   }
   
   useEffect(()=>{

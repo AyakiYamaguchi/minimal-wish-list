@@ -71,7 +71,7 @@ const CreateWishListForm = () => {
     },
     validationSchema: validation,
     onSubmit: values => {
-      // setWishList(values)
+      setWishList(values)
       console.log(values)
     }
   })
