@@ -6,11 +6,12 @@ import { Emoji } from 'emoji-mart';
 type Props = {
   handleClick: Function;
   emojiSize: number;
+  currentEmojiId?: string;
 }
 
-const EmojiPicker:FC<Props> = ({handleClick, emojiSize}) => {
+const EmojiPicker:FC<Props> = ({handleClick, emojiSize, currentEmojiId}) => {
   const [ display , changeDisplay ] = useState(false)
-  const [ iconId, setIconId ] = useState('')
+  const [ iconId, setIconId ] = useState(currentEmojiId)
   const handleSelect = (emoji: any) => {
     handleClick(emoji)
     setIconId(emoji.id)

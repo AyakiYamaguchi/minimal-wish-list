@@ -58,7 +58,7 @@ const WishListDetail = () => {
   
   return (
     <div>
-      { wishList && 
+      { wishList &&
         <section>
           <ListItemDetail 
             title={'Wishリスト'}
@@ -74,7 +74,7 @@ const WishListDetail = () => {
           title={'Discardリスト'}
           listName={discardList.data.listName}
           iconId={discardList.data.iconId}
-          editPath={'/wish-lists/'+ discardList.id + '/edit'}
+          editPath={'/discard-lists/'+ discardList.id + '/edit'}
         />
         </section>
       }

@@ -22,6 +22,15 @@ export const createDiscardList = async(userId:string, listName: string, iconId: 
   })
 }
 
+export const updateDiscardList = async(userId: string, listId: string, listName: string, iconId: string) => {
+  const discardListRef = db.collection('users').doc(userId).collection('discardLists').doc(listId);
+  return await discardListRef.update({
+    'data.listName': listName,
+    'data.iconId': iconId,
+    'data.updatedAt' : firebase.firestore.Timestamp.now(),
+  })
+}
+
 export const updateWishListId = async(userId: string, discardListId: string, wishListId: string) => {
   const discardListRef = db.collection('users').doc(userId).collection('discardLists').doc(discardListId)
   return await discardListRef.update({
