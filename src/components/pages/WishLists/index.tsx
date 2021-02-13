@@ -3,6 +3,7 @@ import DraggableLists from '../../organisms/DraggableLists';
 import { fetchWishLists, updateWishListPriority } from '../../../apis/FirebaseWishList';
 import { AuthContext } from '../../../store/Auth';
 import { StoreContext, SET_WISH_LISTS, WishList, UPDATE_WISH_LIST } from '../../../store';
+import Footer from '../../organisms/Footer';
 
 const WishLists = () => {
   const { AuthState , setAuthState } = useContext(AuthContext);
@@ -60,8 +61,7 @@ const WishLists = () => {
   return (
     <div>
       <DraggableLists wishLists={sortedWisthLists} reorderWishList={reorderWishList}/>
-      {console.log('------sorted-----')}
-      {console.log(sortedWisthLists)}
+      <Footer />
     </div>
   )
 }
