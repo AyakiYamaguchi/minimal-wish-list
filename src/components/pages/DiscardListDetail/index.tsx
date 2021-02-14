@@ -67,8 +67,8 @@ const DiscardListDetail = () => {
   return (
     <div>
       <Header 
-        title={'詳細'}
-        backBtnUrl={'/wish-lists'}
+        title={'リスト詳細'}
+        backBtnUrl={'/discard-lists'}
         showAccountSetting={false}
       />
       
@@ -77,7 +77,7 @@ const DiscardListDetail = () => {
           <section>
           <div className={Style.title_wrap}>
             <FontAwesomeIcon icon={faTrashAlt} className={Style.icon}/>
-            <TitleText title={'Wishリストのために手放すこと'}/>
+            <TitleText title={'手放すもの・やめること'}/>
           </div>
           <ListItemDetail 
             listName={discardList.data.listName}
@@ -90,12 +90,12 @@ const DiscardListDetail = () => {
           <section>
             <div className={Style.title_wrap}>
               <FontAwesomeIcon icon={faFire} className={Style.icon}/>
-              <TitleText title={'Wishリスト'}/>
+              <TitleText title={'新たに手に入れたいもの・やりたいこと'}/>
             </div>
             <ListItemDetail 
               listName={wishList.data.listName}
               iconId={wishList.data.iconId}
-              editPath={'/wish-lists/'+ id + '/edit'}
+              editPath={'/wish-lists/'+ wishList.id + '/edit'}
             />
           </section>
         }

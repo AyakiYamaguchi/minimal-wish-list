@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import Style from './ListItemDetail.module.scss';
-import 'emoji-mart/css/emoji-mart.css';
 import { Emoji } from 'emoji-mart';
 import TitleText from '../../atoms/TitleText'
 import { Link } from 'react-router-dom';

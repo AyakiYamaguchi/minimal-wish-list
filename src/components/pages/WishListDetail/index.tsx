@@ -65,7 +65,7 @@ const WishListDetail = () => {
   return (
     <div>
       <Header 
-        title={'詳細'}
+        title={'リスト詳細'}
         backBtnUrl={'/wish-lists'}
         showAccountSetting={false}
       />

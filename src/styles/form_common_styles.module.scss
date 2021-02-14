@@ -30,6 +30,10 @@
     border: 1px solid $keyColorMedium;
   }
 
+  &__select_icon {
+    margin-bottom: 10px;
+  }
+
   &__error_message {
     color: $errorColorMedium;
     font-size: 1.3rem;

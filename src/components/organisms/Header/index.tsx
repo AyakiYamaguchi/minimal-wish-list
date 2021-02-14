@@ -21,7 +21,7 @@ const Header:FC<Props> = ({title,backBtnUrl,showAccountSetting}) => {
       }
       <h1 className={Style.title}>{title}</h1>
       { showAccountSetting &&
-        <Link to={'/'} className={Style.account_link}>
+        <Link to={'/account-settings'} className={Style.account_link}>
           <FontAwesomeIcon icon={faUserCircle} className={Style.account_icon}/>
         </Link>
       }

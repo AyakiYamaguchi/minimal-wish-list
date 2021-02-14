@@ -1,10 +1,11 @@
 import React, { FC , useContext , useEffect , useState } from 'react'
+import { useHistory } from 'react-router-dom';
 import firebase from '../../../apis/FirebaseConf';
 import {AuthContext, SET_USER} from '../../../store/Auth';
 
 const PrivateRoute = () => {
   const { AuthState, setAuthState } = useContext(AuthContext);
-  let currentUserId = AuthState.user.uid;
+  const history = useHistory()
 
   const loginCheck = () => {
     firebase.auth().onAuthStateChanged((result)=> {
@@ -14,12 +15,14 @@ const PrivateRoute = () => {
           displayName: null
         }
         setAuthState({type: SET_USER, payload: {user: user}})
+      }else{
+        history.push('/signin')
       }
     })
   }
   useEffect(()=>{
     loginCheck()
-  },[currentUserId])
+  },[AuthState.user])
   
   return (
     <div>

@@ -1,8 +1,10 @@
 import React, { FC }from 'react'
-import 'emoji-mart/css/emoji-mart.css';
 import { Emoji } from 'emoji-mart';
 import Style from './ListItem.module.scss';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFire } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
   listType: string;
@@ -15,7 +17,13 @@ const ListItem:FC<Props> = ({listType, listName, iconId, listId}) => {
   return (
     <Link to={'/'+ listType + '/'+ listId}>
       <div className={Style.list_wrapper}>
-        <Emoji emoji={iconId} size={24} key={listId}/>
+        { iconId ? 
+          <Emoji emoji={iconId} size={24} key={listId}/> :
+            listType === 'wish-lists' ? 
+              <FontAwesomeIcon icon={faFire} className={Style.icon}/> :
+              <FontAwesomeIcon icon={faTrashAlt} className={Style.icon}/>
+        }
+        
         <div className={Style.list_name}>{listName}</div>
       </div>
     </Link>

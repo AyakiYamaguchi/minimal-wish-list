@@ -1,0 +1,27 @@
+@import '../../../styles/variables';
+
+.wrapper {
+  position: relative;
+}
+
+.select_icon {
+  font-size: 1.4rem;
+  color: $unselectedColor;
+  display: inline;
+}
+
+.icon {
+  margin-right: 2px;
+  display: inline;
+}
+
+.emoji {
+  display: inline;
+}
+
+.picker {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 100;
+}

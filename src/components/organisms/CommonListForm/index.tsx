@@ -3,7 +3,7 @@ import Style from '../../../styles/form_common_styles.module.scss';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';
-import EmojiPicker from '../../atoms/EmojiPicker';
+import EmojiPicker from '../../molecules/EmojiPicker';
 import SubmitButton from '../../atoms/SubmitButton';
 import CancelButton from '../../atoms/CancelButton';
 
@@ -39,13 +39,6 @@ const CommonListForm:FC<Props> = ({listType, listName, iconId, handleSubmit}) =>
   return (
     <div>
       <form onSubmit={formik.handleSubmit} className={Style.form__wrapper}>
-        <div>
-          <EmojiPicker 
-            handleClick = {setIconId}
-            emojiSize = {36}
-            currentEmojiId={iconId}
-          />
-        </div>
         <div className={Style.formItem__wrapper}>
           <label
             htmlFor="listName"
@@ -53,6 +46,13 @@ const CommonListForm:FC<Props> = ({listType, listName, iconId, handleSubmit}) =>
           >
             { listType === 'wishList' ? 'ほしいもの・やりたいこと' : '手放すもの・やめること'　}
           </label>
+          <div className={Style.formItem__select_icon}>
+            <EmojiPicker 
+              handleClick = {setIconId}
+              emojiSize = {36}
+              currentEmojiId={iconId}
+            />
+          </div>
           <input 
             id="listName"
             name="listName"

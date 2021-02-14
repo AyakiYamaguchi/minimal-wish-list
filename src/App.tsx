@@ -14,6 +14,7 @@ import DiscardLists from './components/pages/DiscardLists';
 import EditDiscardList from './components/pages/EditDiscardList';
 import CreateDiscardList from './components/pages/CreateDiscardList';
 import DiscardListDetail from './components/pages/DiscardListDetail';
+import AccountSettings from './components/pages/AccountSettings';
 
 function App() {
   return (
@@ -52,6 +53,9 @@ function App() {
         </Route>
         <Route exact path="/discard-lists/:id/edit">
           <EditDiscardList />
+        </Route>
+        <Route exact path="/account-settings">
+          <AccountSettings />
         </Route>
       </Switch>
     </Router>

@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { WishList } from '../../../store';
 import { createWishList } from '../../../apis/FirebaseWishList';
 import { createDiscardList, updateWishListId } from '../../../apis/FirebaseDiscardList';
-import EmojiPicker from '../../atoms/EmojiPicker';
+import EmojiPicker from '../../molecules/EmojiPicker';
 import SubmitButton from '../../atoms/SubmitButton';
 
 type FromValues = {
@@ -78,11 +78,11 @@ const CreateWishListForm = () => {
   return (
     <div>
       <form onSubmit={formik.handleSubmit} className={Style.form__wrapper}>
-      <div>
-          <EmojiPicker handleClick={setWishListIcon} emojiSize={36}/>
-      </div>
-      <div className={Style.formItem__wrapper}>
-          <label htmlFor="wishListName" className={Style.formItem__label}>ほしいもの / やりたいこと</label>
+        <div className={Style.formItem__wrapper}>
+          <label htmlFor="wishListName" className={Style.formItem__label}>Wishリスト</label>
+          <div className={Style.formItem__select_icon}>
+            <EmojiPicker handleClick={setWishListIcon} emojiSize={30}/>
+          </div>
           <input
             id="wishListName"
             name="wishListName"
@@ -90,16 +90,17 @@ const CreateWishListForm = () => {
             onChange={formik.handleChange}
             value={formik.values.wishListName}
             className={Style.formItem__input}
+            placeholder={'ほしいもの / やりたいこと'}
           />
           { formik.touched.wishListName && formik.errors.wishListName &&
             <div className={Style.formItem__error_message}>{formik.errors.wishListName}</div> }
         </div>
         
-        <div>
-          <EmojiPicker handleClick={setDiscardListIcon} emojiSize={36}/>
-        </div>
         <div className={Style.formItem__wrapper}>
-          <label htmlFor="discardListName" className={Style.formItem__label}>手放すもの / やめること</label>
+          <label htmlFor="discardListName" className={Style.formItem__label}>Wishリストのために手放すもの</label>
+          <div className={Style.formItem__select_icon}>
+            <EmojiPicker handleClick={setDiscardListIcon} emojiSize={30}/>
+          </div>
           <input
             id="discardListName"
             name="discardListName"
@@ -107,6 +108,7 @@ const CreateWishListForm = () => {
             onChange={formik.handleChange}
             value={formik.values.discardListName}
             className={Style.formItem__input}
+            placeholder={'手放すもの / やめること'}
           />
           { formik.touched.discardListName && formik.errors.discardListName &&
             <div className={Style.formItem__error_message}>{formik.errors.discardListName}</div> }
