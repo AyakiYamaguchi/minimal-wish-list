@@ -48,8 +48,8 @@ const EditDiscardList = () => {
   return (
     <div>
       <Header 
-        title={'Trashリストをつくる'}
-        backBtnUrl={'/discard-lists'}
+        title={'リストの編集'}
+        backBtnUrl={'/discard-lists/'+id}
         showAccountSetting={false}
       />
       { discardList &&
