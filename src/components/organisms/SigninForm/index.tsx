@@ -62,7 +62,7 @@ const SigninForm = () => {
   return (
     <div>
       { error && <div className={Style.formItem__error_message}>{error}</div> }
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className={Style.form__wrapper}>
         <div className={Style.formItem__wrapper}>
           <label htmlFor="email" className={Style.formItem__label}>メールアドレス</label>
           <input

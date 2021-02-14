@@ -64,7 +64,7 @@ const SignupForm = () => {
   })
   return (
     <div>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className={Style.form__wrapper}>
         { error && <div className={Style.formItem__error_message}>{error}</div> }
         <div className={Style.formItem__wrapper}>
           <label htmlFor="email" className={Style.formItem__label}>メールアドレス</label>
