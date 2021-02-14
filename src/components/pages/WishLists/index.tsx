@@ -1,9 +1,13 @@
 import React, { useContext, useEffect } from 'react';
+import Style from './WishLists.module.scss';
 import DraggableLists from '../../organisms/DraggableLists';
 import { fetchWishLists, updateWishListPriority } from '../../../apis/FirebaseWishList';
 import { AuthContext } from '../../../store/Auth';
 import { StoreContext, SET_WISH_LISTS, WishList, UPDATE_WISH_LIST } from '../../../store';
 import Footer from '../../organisms/Footer';
+import Header from '../../organisms/Header';
+import FloatingAddButton from '../../atoms/FloatingAddButton';
+import Layout from '../../templates/Layout';
 
 const WishLists = () => {
   const { AuthState , setAuthState } = useContext(AuthContext);
@@ -60,7 +64,18 @@ const WishLists = () => {
   },[AuthState.user.uid])
   return (
     <div>
-      <DraggableLists wishLists={sortedWisthLists} reorderWishList={reorderWishList}/>
+      <Header 
+        title={'Your wish list'}
+        showAccountSetting={true}
+        />
+      <Layout>
+        <div className={Style.draggable_area_wrap}>
+          <DraggableLists lists={sortedWisthLists} reorderList={reorderWishList}/>
+        </div>
+        <div className={Style.btn_wrap}>
+          <FloatingAddButton pathName={'/create-wishlist'}/>
+        </div>
+      </Layout>
       <Footer />
     </div>
   )

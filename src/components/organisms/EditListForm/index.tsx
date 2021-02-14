@@ -56,7 +56,7 @@ const EditListForm:FC<Props> = ({listType, listId, listName, iconId, uid}) => {
   }
   return (
     <div>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className={Style.form__wrapper}>
         <div>
           <EmojiPicker 
             handleClick = {setIconId}

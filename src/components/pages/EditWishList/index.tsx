@@ -4,6 +4,7 @@ import { fetchWishListDetail } from '../../../apis/FirebaseWishList';
 import { AuthContext } from '../../../store/Auth';
 import { WishList } from '../../../store/index';
 import EditListForm from '../../organisms/EditListForm';
+import Header from '../../organisms/Header';
 
 type RouteParams = {
   id: string;
@@ -37,6 +38,11 @@ const EditWishList = () => {
 
   return (
     <div>
+      <Header 
+       title="リストの編集"
+       backBtnUrl={'/wish-lists/'+ wishList?.id}
+       showAccountSetting={false}
+      />
       { wishList && 
         <EditListForm 
           listType={'wishList'}

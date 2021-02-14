@@ -6,6 +6,12 @@ import { WishList, DiscardList} from '../../../store/index';
 import { AuthContext } from '../../../store/Auth';
 import { fetchWishListDetail } from '../../../apis/FirebaseWishList';
 import { fetchDiscardListDetail } from '../../../apis/FirebaseDiscardList';
+import Header from '../../organisms/Header';
+import Layout from '../../templates/Layout';
+import TitleText from '../../atoms/TitleText';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faFire } from '@fortawesome/free-solid-svg-icons';
 
 type RouteParams = {
   id: string;
@@ -58,28 +64,39 @@ const WishListDetail = () => {
   
   return (
     <div>
-      { wishList &&
-        <section>
+      <Header 
+        title={'詳細'}
+        backBtnUrl={'/wish-lists'}
+        showAccountSetting={false}
+      />
+      <Layout>
+        { wishList &&
+          <section>
+            <div className={Style.title_wrap}>
+              <FontAwesomeIcon icon={faFire} className={Style.icon}/>
+              <TitleText title={'Wishリスト'}/>
+            </div>
+            <ListItemDetail 
+              listName={wishList.data.listName}
+              iconId={wishList.data.iconId}
+              editPath={'/wish-lists/'+ id + '/edit'}
+            />
+          </section>
+        }
+        {  discardList &&
+          <section>
+          <div className={Style.title_wrap}>
+            <FontAwesomeIcon icon={faTrashAlt} className={Style.icon}/>
+            <TitleText title={'Wishリストのために手放すこと'}/>
+          </div>
           <ListItemDetail 
-            title={'Wishリスト'}
-            listName={wishList.data.listName}
-            iconId={wishList.data.iconId}
-            editPath={'/wish-lists/'+ id + '/edit'}
+            listName={discardList.data.listName}
+            iconId={discardList.data.iconId}
+            editPath={'/discard-lists/'+ discardList.id + '/edit'}
           />
-        </section>
-      }
-      {  discardList &&
-        <section>
-        <ListItemDetail 
-          title={'Discardリスト'}
-          listName={discardList.data.listName}
-          iconId={discardList.data.iconId}
-          editPath={'/discard-lists/'+ discardList.id + '/edit'}
-        />
-        </section>
-      }
-
-      
+          </section>
+        }
+      </Layout>
     </div>
   )
 }

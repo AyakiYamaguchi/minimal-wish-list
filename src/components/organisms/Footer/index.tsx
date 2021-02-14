@@ -11,7 +11,7 @@ const Footer = () => {
     <footer className={Style.footer}>
       <ul className={Style.wrapper}>
         <li>
-          { location.pathname === '/wish-lists' ? 
+          { location.pathname === '/wish-lists' ?
             <Link to="/wish-lists" className={Style.listItem_wrapper}>
               <FontAwesomeIcon icon={faFire} className={`${Style.icon} ${Style.selected}`} />
               <p className={`${Style.menu_text} ${Style.selected}`}>Wish</p>

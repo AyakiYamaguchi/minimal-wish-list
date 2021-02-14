@@ -1,5 +1,10 @@
 @import './variables.scss';
 
+.form__wrapper {
+  padding: 15px 5% 50px 5%;
+  background-color: #fff;
+}
+
 .formItem {
   &__wrapper {
     margin-bottom: 25px;
@@ -9,20 +14,20 @@
     display: block;
     font-size: 1.4rem;
     font-weight: bold;
-    color: $keyColorHeavy;
+    color: $fontColorBlack;
     margin-bottom: 10px;
   }
 
   &__input {
     width: 100%;
-    background-color: #F5F8FF;
+    background-color: #f8f8f4;
     border-radius: 7px;
     font-size: 1.4rem;
     padding: 14px 17px;
   }
 
   &__input:focus {
-    border: 2px solid $keyColorMedium;
+    border: 1px solid $keyColorMedium;
   }
 
   &__error_message {

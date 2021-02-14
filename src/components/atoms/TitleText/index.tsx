@@ -8,7 +8,7 @@ type Props = {
 const TitleText:FC<Props> = ({title}) => {
   return (
     <div>
-      <h2>{title}</h2>
+      <h2 className={Style.title}>{title}</h2>
     </div>
   )
 }

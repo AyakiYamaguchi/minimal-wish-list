@@ -77,12 +77,12 @@ const CreateWishListForm = () => {
   })
   return (
     <div>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className={Style.form__wrapper}>
       <div>
           <EmojiPicker handleClick={setWishListIcon} emojiSize={36}/>
       </div>
       <div className={Style.formItem__wrapper}>
-          <label htmlFor="wishListName" className={Style.formItem__label}>ほしいもの</label>
+          <label htmlFor="wishListName" className={Style.formItem__label}>ほしいもの / やりたいこと</label>
           <input
             id="wishListName"
             name="wishListName"
@@ -99,7 +99,7 @@ const CreateWishListForm = () => {
           <EmojiPicker handleClick={setDiscardListIcon} emojiSize={36}/>
         </div>
         <div className={Style.formItem__wrapper}>
-          <label htmlFor="discardListName" className={Style.formItem__label}>手放すもの</label>
+          <label htmlFor="discardListName" className={Style.formItem__label}>手放すもの / やめること</label>
           <input
             id="discardListName"
             name="discardListName"
@@ -111,7 +111,9 @@ const CreateWishListForm = () => {
           { formik.touched.discardListName && formik.errors.discardListName &&
             <div className={Style.formItem__error_message}>{formik.errors.discardListName}</div> }
         </div>
-        <SubmitButton btnText={'登録する'}/>
+        <div className={Style.formItem__button_wrapper}>
+          <SubmitButton btnText={'登録する'}/>
+        </div>
       </form>
     </div>
   )

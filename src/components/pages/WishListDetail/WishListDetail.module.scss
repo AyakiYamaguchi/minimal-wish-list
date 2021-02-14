@@ -1,1 +1,15 @@
 @import '../../../styles/variables';
+
+.title_wrap {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding-left: 3px;
+}
+
+.icon {
+  font-size: 1.8rem;
+  margin-right: 7px;
+  color: $keyColorHeavy;
+}

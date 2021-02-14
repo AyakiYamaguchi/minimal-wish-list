@@ -1,0 +1,37 @@
+@import '../../../styles/variables';
+
+.header {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid $baseColorGrayMedium;
+  background-color: $baseColorWhite;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.backBtn_link {
+  position: absolute;
+  left: 5%;
+}
+
+.backBtn_icon {
+  font-size: 2.0rem;
+  color: $fontColorBlack;
+}
+
+.account_link {
+  position: absolute;
+  right: 5%;
+}
+
+.account_icon {
+  font-size: 2.4rem;
+  color: $fontColorBlack;
+}
