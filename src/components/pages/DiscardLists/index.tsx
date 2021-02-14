@@ -58,7 +58,11 @@ const DiscardLists = () => {
         />
       <Layout>
         <div className={Style.draggable_area_wrap}>
-          <DraggableLists lists={globalState.discardLists} reorderList={reorderDiscardList}/>
+          <DraggableLists
+            listType={'discard-lists'}
+            lists={globalState.discardLists}
+            reorderList={reorderDiscardList}
+          />
         </div>
         <div className={Style.btn_wrap}>
           <FloatingAddButton pathName={'/create-discardlist'}/>

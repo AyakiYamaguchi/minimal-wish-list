@@ -5,14 +5,15 @@ import Style from './ListItem.module.scss';
 import { Link } from 'react-router-dom';
 
 type Props = {
+  listType: string;
   listName: string;
   iconId: string;
   listId: string;
 }
 
-const ListItem:FC<Props> = ({listName,iconId,listId}) => {
+const ListItem:FC<Props> = ({listType, listName, iconId, listId}) => {
   return (
-    <Link to={'/wish-lists/'+ listId}>
+    <Link to={'/'+ listType + '/'+ listId}>
       <div className={Style.list_wrapper}>
         <Emoji emoji={iconId} size={24} key={listId}/>
         <div className={Style.list_name}>{listName}</div>

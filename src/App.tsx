@@ -13,6 +13,7 @@ import EditWishList from './components/pages/EditWishList';
 import DiscardLists from './components/pages/DiscardLists';
 import EditDiscardList from './components/pages/EditDiscardList';
 import CreateDiscardList from './components/pages/CreateDiscardList';
+import DiscardListDetail from './components/pages/DiscardListDetail';
 
 function App() {
   return (
@@ -42,6 +43,9 @@ function App() {
         </Route>
         <Route exact path="/discard-lists">
           <DiscardLists />
+        </Route>
+        <Route exact path="/discard-lists/:id">
+          <DiscardListDetail />
         </Route>
         <Route exact path="/create-discardlist">
           <CreateDiscardList />

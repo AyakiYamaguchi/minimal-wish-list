@@ -70,7 +70,11 @@ const WishLists = () => {
         />
       <Layout>
         <div className={Style.draggable_area_wrap}>
-          <DraggableLists lists={sortedWisthLists} reorderList={reorderWishList}/>
+          <DraggableLists
+            listType={'wish-lists'}
+            lists={sortedWisthLists}
+            reorderList={reorderWishList}
+          />
         </div>
         <div className={Style.btn_wrap}>
           <FloatingAddButton pathName={'/create-wishlist'}/>

@@ -4,11 +4,12 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { WishList } from '../../../store/index';
 
 type Props = {
+  listType: 'wish-lists' | 'discard-lists'
   lists: any[];
   reorderList: Function;
 }
 
-const DraggableLists:FC<Props> = ({lists, reorderList}) => {
+const DraggableLists:FC<Props> = ({listType, lists, reorderList}) => {
 
   const onDragEnd = (result:any) => {
     console.log('-----並び替え前-----')
@@ -41,7 +42,12 @@ const DraggableLists:FC<Props> = ({lists, reorderList}) => {
                       <Draggable key={list.id} draggableId={list.id} index={index}>
                         {(provided)=>(
                           <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                            <ListItem listName={list.data.listName} iconId={list.data.iconId} listId={list.id}/>
+                            <ListItem 
+                              listType={listType}
+                              listName={list.data.listName}
+                              iconId={list.data.iconId}
+                              listId={list.id}
+                            />
                           </li>
                         )}
                       </Draggable>
