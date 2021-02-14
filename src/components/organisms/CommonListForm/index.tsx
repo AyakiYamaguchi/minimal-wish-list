@@ -2,8 +2,6 @@ import React, { FC } from 'react'
 import Style from '../../../styles/form_common_styles.module.scss';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { updateWishList } from '../../../apis/FirebaseWishList';
-import { updateDiscardList } from '../../../apis/FirebaseDiscardList';
 import { useHistory } from 'react-router-dom';
 import EmojiPicker from '../../atoms/EmojiPicker';
 import SubmitButton from '../../atoms/SubmitButton';
@@ -11,13 +9,12 @@ import CancelButton from '../../atoms/CancelButton';
 
 type Props = {
   listType: 'wishList' | 'discardList';
-  listId: string;
   listName: string;
   iconId: string;
-  uid: string;
+  handleSubmit: Function;
 }
 
-const EditListForm:FC<Props> = ({listType, listId, listName, iconId, uid}) => {
+const CommonListForm:FC<Props> = ({listType, listName, iconId, handleSubmit}) => {
   const history = useHistory();
 
   const validation = Yup.object({
@@ -32,22 +29,7 @@ const EditListForm:FC<Props> = ({listType, listId, listName, iconId, uid}) => {
     },
     validationSchema: validation,
     onSubmit: values => {
-      console.log(values)
-      if(listType === 'wishList'){
-        updateWishList(uid,listId,values.listName,values.iconId)
-          .then( result =>{
-            history.push('/wish-lists/'+ listId)
-          }).catch( error =>{
-
-          })
-      }else if(listType === 'discardList'){
-        updateDiscardList(uid,listId,values.listName,values.iconId)
-          .then( result => {
-            history.push('/discard-lists/'+ listId)
-          }).catch( error => {
-
-          })
-      }
+      handleSubmit(values)
     }
   })
 
@@ -92,4 +74,4 @@ const EditListForm:FC<Props> = ({listType, listId, listName, iconId, uid}) => {
   )
 }
 
-export default EditListForm
+export default CommonListForm

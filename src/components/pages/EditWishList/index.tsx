@@ -1,10 +1,11 @@
 import React, {useContext, useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom';
-import { fetchWishListDetail } from '../../../apis/FirebaseWishList';
+import { fetchWishListDetail, updateWishList } from '../../../apis/FirebaseWishList';
 import { AuthContext } from '../../../store/Auth';
 import { WishList } from '../../../store/index';
-import EditListForm from '../../organisms/EditListForm';
+import CommonListForm from '../../organisms/CommonListForm';
 import Header from '../../organisms/Header';
+import { useHistory } from 'react-router-dom';
 
 type RouteParams = {
   id: string;
@@ -13,6 +14,7 @@ type RouteParams = {
 const EditWishList = () => {
   const { AuthState } = useContext(AuthContext);
   const uid = AuthState.user.uid;
+  const history = useHistory();
   const {id} = useParams<RouteParams>();
   const [ wishList , setWishList ] = useState<WishList>();
   const getWishList = () => {
@@ -30,6 +32,19 @@ const EditWishList = () => {
         alert(error)
       ])
   }
+
+  const updateList = (values: any) => {
+    console.log(values)
+    if(wishList){
+      updateWishList(uid,wishList.id,values.listName,values.iconId)
+      .then( result =>{
+        history.push('/wish-lists/'+ wishList.id)
+      }).catch( error =>{
+        alert(error)
+      })
+    }
+    
+  }
   useEffect(()=>{
     if(AuthState.user){
       getWishList()
@@ -44,12 +59,11 @@ const EditWishList = () => {
        showAccountSetting={false}
       />
       { wishList && 
-        <EditListForm 
+        <CommonListForm 
           listType={'wishList'}
-          listId={wishList.id}
           listName={wishList.data.listName}
           iconId={wishList.data.iconId}
-          uid={uid}
+          handleSubmit={updateList}
         />
       }
     </div>
