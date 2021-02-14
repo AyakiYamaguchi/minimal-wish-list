@@ -1,12 +1,13 @@
-import React, { FC , useContext , useEffect , useState } from 'react'
-import { useHistory } from 'react-router-dom';
+import React, { useContext , useEffect , useState } from 'react'
+import { Redirect } from 'react-router-dom';
 import firebase from '../../../apis/FirebaseConf';
 import {AuthContext, SET_USER} from '../../../store/Auth';
+import Loading from '../Loading';
 
 const PrivateRoute = () => {
   const { AuthState, setAuthState } = useContext(AuthContext);
-  const history = useHistory()
-
+  const [loading, setLoading] = useState(true)
+  let currentUserId = AuthState.user.uid
   const loginCheck = () => {
     firebase.auth().onAuthStateChanged((result)=> {
       if(result){
@@ -15,18 +16,25 @@ const PrivateRoute = () => {
           displayName: null
         }
         setAuthState({type: SET_USER, payload: {user: user}})
-      }else{
-        history.push('/signin')
       }
+      setLoading(false)
     })
   }
   useEffect(()=>{
     loginCheck()
-  },[AuthState.user])
+  },[])
   
   return (
     <div>
-      
+      { !loading ?
+        ( currentUserId === "" ?
+          <Redirect to='/top' /> : <></>
+        ) : (
+          <div>
+            <Loading />
+          </div>
+        )
+      }
     </div>
   )
 }
