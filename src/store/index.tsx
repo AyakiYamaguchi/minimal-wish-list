@@ -37,7 +37,7 @@ export const UPDATE_WISH_LIST = 'UPDATE_WISH_LIST';
 export const DELETE_WISH_LIST = 'DELETE_WISH_LIST';
 export const SET_DISCARD_LISTS = 'SET_DISCARD_LISTS';
 export const CRATE_DISCARD_LIST = 'CRATE_DISCARD_LIST';
-export const EDIT_DISCARD_LIST = 'EDIT_DISCARD_LIST';
+export const UPDATE_DISCARD_LIST = 'UPDATE_DISCARD_LIST';
 export const DELETE_DISCARD_LIST = 'DELETE_DISCARD_LIST';
 
 type Action = 
@@ -47,7 +47,7 @@ type Action =
 { type: 'DELETE_WISH_LIST', payload: { wishListId: string }} |
 { type: 'SET_DISCARD_LISTS', payload: { discardLists: DiscardList[] }} |
 { type: 'CRATE_DISCARD_LIST', payload: { discardList: DiscardList }} |
-{ type: 'EDIT_DISCARD_LIST', payload: { discardList: DiscardList }} |
+{ type: 'UPDATE_DISCARD_LIST', payload: { discardList: DiscardList }} |
 { type: 'DELETE_DISCARD_LIST', payload: { discardList: DiscardList }};
 
 const initialState:State = {
@@ -68,6 +68,17 @@ const reducer = (state: State, action: Action ) => {
         return list
       })
       return { ...state, wishLists: updatedWishLists}
+    case 'SET_DISCARD_LISTS':
+      return { ...state, discardLists: action.payload.discardLists }
+    case 'UPDATE_DISCARD_LIST':
+      const discardList = action.payload.discardList
+      const updatedDiscardLists = state.discardLists.map(list =>{
+        if(list.id === discardList.id){
+          return discardList
+        }
+        return list
+      })
+      return { ...state, discardLists: updatedDiscardLists}
     default:
       return state
   }

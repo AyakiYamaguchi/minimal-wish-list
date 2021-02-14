@@ -1,5 +1,9 @@
 import firebase ,{ db } from './FirebaseConf';
 
+export const fetchDiscardLists = async(userId: string) => {
+  const discardListsRef = db.collection('users').doc(userId).collection('discardLists')
+  return await discardListsRef.orderBy('data.priority','asc').get();
+}
 
 export const fetchDiscardListDetail = async(userId: string, listId: string) => {
   const discardListRef = db.collection('users').doc(userId).collection('discardLists').doc(listId)
@@ -30,6 +34,16 @@ export const updateDiscardList = async(userId: string, listId: string, listName:
     'data.updatedAt' : firebase.firestore.Timestamp.now(),
   })
 }
+
+export const updateDiscardListPriority = async(userId: string, listId: string, priority: number) => {
+  const discardListRef = db.collection('users').doc(userId).collection('discardLists').doc(listId);
+  return await discardListRef.update({
+      'data.priority': priority,
+      'data.updatedAt': firebase.firestore.Timestamp.now()
+    }
+  )
+}
+
 
 export const updateWishListId = async(userId: string, discardListId: string, wishListId: string) => {
   const discardListRef = db.collection('users').doc(userId).collection('discardLists').doc(discardListId)
