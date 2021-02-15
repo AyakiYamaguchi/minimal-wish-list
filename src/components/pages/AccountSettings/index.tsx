@@ -37,7 +37,7 @@ const AccountSettings = () => {
   const signOut = () => {
     SignOut().then(()=>{
       setAuthState({type: DELETE_USER})
-      history.push('/signin')
+      history.push('/top')
     }).catch(error=>{
       alert(error)
     })

@@ -2,10 +2,13 @@ import React, { useContext, useState } from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';
-import Style from '../../../styles/form_common_styles.module.scss';
+import Style from './SigninForm.module.scss';
 import SubmitButton from '../../atoms/SubmitButton';
 import { SignInWithEmailAndPassword } from '../../../apis/FirebaseAuth';
-import { AuthContext , SET_USER, User } from '../../../store/Auth';
+import { AuthContext , SET_USER } from '../../../store/Auth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
+import { faKey } from '@fortawesome/free-solid-svg-icons';
 
 const SigninForm = () => {
   const { setAuthState } = useContext(AuthContext)
@@ -64,7 +67,7 @@ const SigninForm = () => {
       { error && <div className={Style.formItem__error_message}>{error}</div> }
       <form onSubmit={formik.handleSubmit} className={Style.form__wrapper}>
         <div className={Style.formItem__wrapper}>
-          <label htmlFor="email" className={Style.formItem__label}>メールアドレス</label>
+          <FontAwesomeIcon icon={faEnvelope} className={Style.icon}/>
           <input
             id="email"
             name="email"
@@ -72,13 +75,13 @@ const SigninForm = () => {
             onChange={formik.handleChange}
             value={formik.values.email}
             className={Style.formItem__input}
+            placeholder={'メールアドレス'}
           />
-          { formik.touched.email && formik.errors.email &&
-            <div className={Style.formItem__error_message}>{formik.errors.email}</div> }
         </div>
-        
+        { formik.touched.email && formik.errors.email &&
+            <div className={Style.formItem__error_message}>{formik.errors.email}</div> }
         <div className={Style.formItem__wrapper}>
-          <label htmlFor="password" className={Style.formItem__label}>パスワード</label>
+          <FontAwesomeIcon icon={faKey} className={Style.icon}/>
           <input
             id="password"
             name="password"
@@ -86,13 +89,14 @@ const SigninForm = () => {
             onChange={formik.handleChange}
             value={formik.values.password}
             className={Style.formItem__input}
+            placeholder={'パスワード'}
           />
-          { formik.touched.password && formik.errors.password &&
-            <div className={Style.formItem__error_message}>{formik.errors.password}</div> }
+          
         </div>
-        
+        { formik.touched.password && formik.errors.password &&
+            <div className={Style.formItem__error_message}>{formik.errors.password}</div> }
         <div className={Style.formItem__button_wrapper}>
-          <SubmitButton btnText={"ログイン"}/>
+          <SubmitButton btnText={"サインイン"}/>
         </div>
       </form>
     </div>

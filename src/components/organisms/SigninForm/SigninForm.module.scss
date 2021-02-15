@@ -1,0 +1,36 @@
+@import '../../../styles/variables';
+
+
+
+.form__wrapper {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.formItem__wrapper {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+  border-bottom: 1px solid $baseColorGrayMedium;
+  margin-top: 20px;
+}
+
+.icon {
+  font-size: 1.8rem;
+  color: $unselectedColor;
+  margin-left: 10px;
+}
+
+.formItem__input {
+  font-size: 1.4rem;
+  padding: 10px 15px;
+  background-color: none;
+  width: 100%;
+}
+
+.formItem__button_wrapper {
+  text-align: center;
+  padding: 0 5%;
+  margin-top: 20px;
+}
