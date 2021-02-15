@@ -23,7 +23,7 @@
 }
 
 .formItem__input {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   padding: 10px 15px;
   background-color: none;
   width: 100%;
@@ -33,4 +33,15 @@
   text-align: center;
   padding: 0 5%;
   margin-top: 20px;
+}
+
+.formItem__error_message {
+  color: $errorColorMedium;
+  font-size: 1.3rem;
+  margin-top: 5px;
+  padding: 10px 17px;
+  border-radius: 7px;
+  background-color: $errorColorLight;
+  width: 80%;
+  margin: 0 auto;
 }

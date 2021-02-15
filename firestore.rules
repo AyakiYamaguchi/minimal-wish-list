@@ -1,9 +1,48 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if
-          request.time < timestamp.date(2021, 3, 8);
+    function isLogin() {
+    return request.auth.uid != null;
+    }
+
+    function onlyIdentityUser(userId){
+      return isLogin() && request.auth.uid == userId;
+    }
+
+    // function isValidWishList(wishList){
+    	
+    // }
+
+    // function isValidDiscardList(discardList){
+    	
+    // }
+
+
+    match /users/{userId}{
+      allow get: if isLogin()
+      && onlyIdentityUser(userId);
+      
+      allow create: if isLogin();
+
+      match /wishLists/{wishListId}{
+        allow read : if onlyIdentityUser(userId);
+
+        allow create: if onlyIdentityUser(userId);
+
+        allow update: if onlyIdentityUser(userId);
+
+        allow delete: if onlyIdentityUser(userId);
+      }
+
+      match /discardLists/{discardListId}{
+        allow read : if onlyIdentityUser(userId);
+
+        allow create: if onlyIdentityUser(userId);
+
+        allow update: if onlyIdentityUser(userId);
+
+        allow delete: if onlyIdentityUser(userId);
+      }
     }
   }
 }

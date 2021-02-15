@@ -80,10 +80,10 @@ const SignupForm = () => {
             className={Style.formItem__input}
             placeholder={'メールアドレス'}
           />
-          { formik.touched.email && formik.errors.email &&
-            <div className={Style.formItem__error_message}>{formik.errors.email}</div> }
         </div>
-        
+        { formik.touched.email && formik.errors.email &&
+            <div className={Style.formItem__error_message}>{formik.errors.email}</div> }
+
         <div className={Style.formItem__wrapper}>
           <FontAwesomeIcon icon={faKey} className={Style.icon}/>
           <input
@@ -95,9 +95,9 @@ const SignupForm = () => {
             className={Style.formItem__input}
             placeholder={'パスワード'}
           />
-          { formik.touched.password && formik.errors.password &&
-            <div className={Style.formItem__error_message}>{formik.errors.password}</div> }
         </div>
+        { formik.touched.password && formik.errors.password &&
+            <div className={Style.formItem__error_message}>{formik.errors.password}</div> }
 
         <div className={Style.formItem__wrapper}>
         <FontAwesomeIcon icon={faKey} className={Style.icon}/>
@@ -110,9 +110,10 @@ const SignupForm = () => {
             className={Style.formItem__input}
             placeholder={'確認用パスワード'}
           />
-          { formik.touched.confirmPassword && formik.errors.confirmPassword && 
-            <div className={Style.formItem__error_message}>{formik.errors.confirmPassword}</div> }
         </div>
+        { formik.touched.confirmPassword && formik.errors.confirmPassword && 
+            <div className={Style.formItem__error_message}>{formik.errors.confirmPassword}</div> }
+            
         <div className={Style.formItem__button_wrapper}>
           <SubmitButton btnText={"サインアップ"}/>
         </div>

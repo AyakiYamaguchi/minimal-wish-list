@@ -9,7 +9,7 @@ type Props = {
 const CancelButton:FC<Props> = ({btnText, handleClick}) => {
   return (
     <div>
-      <button onClick={handleClick}>
+      <button onClick={handleClick} className={Style.button}>
         {btnText}
       </button>
     </div>

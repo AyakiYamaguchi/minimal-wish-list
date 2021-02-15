@@ -64,11 +64,15 @@ const CommonListForm:FC<Props> = ({listType, listName, iconId, handleSubmit}) =>
           { formik.touched.listName && formik.errors.listName &&
               <div className={Style.formItem__error_message}>{formik.errors.listName}</div> }
         </div>
-        <SubmitButton btnText={'更新する'}/>
-        <CancelButton 
-          btnText={'キャンセル'}
-          handleClick={()=> history.goBack()}
-        />
+        <div className={Style.formItem__button_wrapper}>
+          <SubmitButton btnText={'更新する'}/>
+        </div>
+        <div className={Style.formItem__button_wrapper}>
+          <CancelButton 
+            btnText={'キャンセル'}
+            handleClick={()=> history.goBack()}
+          />
+        </div>
       </form>
     </div>
   )

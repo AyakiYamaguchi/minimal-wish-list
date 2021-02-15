@@ -4,11 +4,11 @@ import * as Yup from 'yup';
 import Style from '../../../styles/form_common_styles.module.scss';
 import { AuthContext } from '../../../store/Auth';
 import { useHistory } from 'react-router-dom';
-import { WishList } from '../../../store';
 import { createWishList } from '../../../apis/FirebaseWishList';
 import { createDiscardList, updateWishListId } from '../../../apis/FirebaseDiscardList';
 import EmojiPicker from '../../molecules/EmojiPicker';
 import SubmitButton from '../../atoms/SubmitButton';
+import CancelButton from '../../atoms/CancelButton';
 
 type FromValues = {
   wishListName: string,
@@ -116,6 +116,13 @@ const CreateWishListForm = () => {
         <div className={Style.formItem__button_wrapper}>
           <SubmitButton btnText={'登録する'}/>
         </div>
+        <div className={Style.formItem__button_wrapper}>
+          <CancelButton 
+            btnText={'キャンセル'}
+            handleClick={()=> history.goBack()}
+          />
+        </div>
+        
       </form>
     </div>
   )
