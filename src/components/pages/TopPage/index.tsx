@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
-import LinkButton from '../../atoms/LinkButton';
 import Logo from '../../atoms/Logo';
-import SigninForm from '../../organisms/SigninForm';
+import LoginForm from '../../organisms/LoginForm';
 import SignupForm from '../../organisms/SignupForm';
 import Layout from '../../templates/Layout';
 import Style from './TopPage.module.scss';
 
 const TopPage = () => {
-  const [ selectMenu, setSelectMenu ] = useState('signin')
+  const [ selectMenu, setSelectMenu ] = useState('login')
   return (
     <div className={Style.background_img}>
       <div className={Style.background_color}>
@@ -18,21 +17,21 @@ const TopPage = () => {
           <div className={Style.form_area_wrapper}>
             <div className={Style.tab_wrapper}>
               <div 
-                className={`${Style.menu_tab} ${selectMenu === 'signin' && Style.selected_tab}`}
-                onClick={()=> setSelectMenu('signin')}>
-                SIGN IN
+                className={`${Style.menu_tab} ${selectMenu === 'login' && Style.selected_tab}`}
+                onClick={()=> setSelectMenu('login')}>
+                LOGIN
               </div>
               <div 
                 className={`${Style.menu_tab} ${selectMenu === 'signup' && Style.selected_tab}`}
                 onClick={()=> setSelectMenu('signup')}
               >
-                SIGN UP
+                SIGNUP
               </div>
             </div>
 
             <div className={Style.form_wrapper}>
-              { selectMenu === 'signin' &&
-                <SigninForm />
+              { selectMenu === 'login' &&
+                <LoginForm />
               }
               { selectMenu === 'signup' &&
                 <SignupForm />

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Style from '../../organisms/SigninForm/SigninForm.module.scss';
+import Style from '../../organisms/LoginForm/LoginForm.module.scss';
 import { useHistory } from 'react-router-dom';
 import SubmitButton from '../../atoms/SubmitButton';
 import { SignupWithEmailAndPassword } from '../../../apis/FirebaseAuth';
@@ -56,7 +56,7 @@ const SignupForm = () => {
               displayName: null,
             }
             setAuthState({type: SET_USER, payload: {user: user}})
-            history.push('/wish-lists')
+            history.push('/onboading-create-list')
           }
         })
         .catch((error)=>{

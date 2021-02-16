@@ -13,6 +13,9 @@ import EditDiscardList from './components/pages/EditDiscardList';
 import CreateDiscardList from './components/pages/CreateDiscardList';
 import DiscardListDetail from './components/pages/DiscardListDetail';
 import AccountSettings from './components/pages/AccountSettings';
+import OnboadingCreateList from './components/pages/OnboadingCreateList';
+import OnboadingDiscard from './components/pages/OnboadingDiscard';
+import OnboadingPriority from './components/pages/OnboadingPriority';
 
 function App() {
   return (
@@ -21,6 +24,15 @@ function App() {
       <Switch>
         <Route exact path="/top">
           <TopPage />
+        </Route>
+        <Route exact path="/onboading-create-list">
+          <OnboadingCreateList />
+        </Route>
+        <Route exact path="/onboading-priority">
+          <OnboadingPriority />
+        </Route>
+        <Route exact path="/onboading-discard">
+          <OnboadingDiscard />
         </Route>
         <Route exact path="/wish-lists">
           <WishLists />

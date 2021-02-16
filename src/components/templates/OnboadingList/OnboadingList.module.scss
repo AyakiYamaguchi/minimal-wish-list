@@ -1,0 +1,66 @@
+@import '../../../styles/variables';
+
+.content_wrapper {
+  margin-top: 40px;
+}
+
+.image_wrapper {
+  text-align: center;
+}
+
+.image {
+  width: 70%;
+  height: auto;
+}
+
+.text_wrapper {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 1.7rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.description {
+  font-size: 1.4rem;
+  line-height: 1.8;
+}
+
+.progress_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+.progress_item {
+  background-color: $baseColorGrayMedium;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  margin: 0 8px;
+}
+
+.progress_now {
+  background-color: $keyColorHeavy;
+}
+
+.link_btn_wrapper {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.link_btn {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: $baseColorWhite;
+  background-color: $keyColorHeavy;
+  padding: 10px 25px;
+  border-radius: 30px;
+}

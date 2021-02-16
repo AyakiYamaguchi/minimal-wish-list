@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';
-import Style from './SigninForm.module.scss';
+import Style from './LoginForm.module.scss';
 import SubmitButton from '../../atoms/SubmitButton';
 import { SignInWithEmailAndPassword } from '../../../apis/FirebaseAuth';
 import { AuthContext , SET_USER } from '../../../store/Auth';
@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import { faKey } from '@fortawesome/free-solid-svg-icons';
 
-const SigninForm = () => {
+const LoginForm = () => {
   const { setAuthState } = useContext(AuthContext)
   const [ error, setError ] = useState('')
   const history = useHistory()
@@ -91,16 +91,15 @@ const SigninForm = () => {
             className={Style.formItem__input}
             placeholder={'パスワード'}
           />
-          
         </div>
         { formik.touched.password && formik.errors.password &&
             <div className={Style.formItem__error_message}>{formik.errors.password}</div> }
         <div className={Style.formItem__button_wrapper}>
-          <SubmitButton btnText={"サインイン"}/>
+          <SubmitButton btnText={"ログイン"}/>
         </div>
       </form>
     </div>
   )
 }
 
-export default SigninForm
+export default LoginForm
