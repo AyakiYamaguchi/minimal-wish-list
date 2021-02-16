@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import ListItem from '../../molecules/ListItem';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { WishList } from '../../../store/index';
+import Style from './DraggableLists.module.scss';
 
 type Props = {
   listType: 'wish-lists' | 'discard-lists'
@@ -30,36 +30,43 @@ const DraggableLists:FC<Props> = ({listType, lists, reorderList}) => {
   }
   return (
     <div>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="lists">
-          {
-            (provided)=> (
-              <ul {...provided.droppableProps} ref={provided.innerRef}>
-                {
-                  lists.map((list,index)=>{
-                    
-                    return(
-                      <Draggable key={list.id} draggableId={list.id} index={index}>
-                        {(provided)=>(
-                          <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                            <ListItem 
-                              listType={listType}
-                              listName={list.data.listName}
-                              iconId={list.data.iconId}
-                              listId={list.id}
-                            />
-                          </li>
-                        )}
-                      </Draggable>
-                    )
-                  })
-                }
-              </ul>
-            )
-          }
-          
-        </Droppable>
-      </DragDropContext>
+      { lists.length === 0 ? 
+        <div className={Style.empty_area}>
+          <p className={Style.empty_message}>まだリストが登録されていません。</p>
+          <p className={Style.empty_message}>+ボタンからリストを追加しましょう。</p>
+        </div> :
+      
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId="lists">
+            {
+              (provided)=> (
+                <ul {...provided.droppableProps} ref={provided.innerRef}>
+                  {
+                    lists.map((list,index)=>{
+                      
+                      return(
+                        <Draggable key={list.id} draggableId={list.id} index={index}>
+                          {(provided)=>(
+                            <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                              <ListItem 
+                                listType={listType}
+                                listName={list.data.listName}
+                                iconId={list.data.iconId}
+                                listId={list.id}
+                              />
+                            </li>
+                          )}
+                        </Draggable>
+                      )
+                    })
+                  }
+                </ul>
+              )
+            }
+            
+          </Droppable>
+        </DragDropContext>
+      }
     </div>
   )
 }

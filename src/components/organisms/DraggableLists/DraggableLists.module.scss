@@ -1,0 +1,12 @@
+@import '../../../styles/variables';
+
+.empty_area {
+  width: 80%;
+  margin: 40px auto;
+}
+
+.empty_message {
+  font-size: 1.4rem;
+  color: $unselectedColor;
+  padding: 5px 0;
+}
