@@ -46,8 +46,9 @@ export const updateWishListPriority = async(userId: string, listId: string, prio
   )
 }
 
-export const deleteWishList = (userId: string) => {
-  
+export const deleteWishList = async(userId: string, listId: string) => {
+  const wishListRef = db.collection('users').doc(userId).collection('wishLists').doc(listId);
+  return await wishListRef.delete()
 }
 
 

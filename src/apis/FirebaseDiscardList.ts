@@ -44,10 +44,14 @@ export const updateDiscardListPriority = async(userId: string, listId: string, p
   )
 }
 
-
 export const updateWishListId = async(userId: string, discardListId: string, wishListId: string) => {
   const discardListRef = db.collection('users').doc(userId).collection('discardLists').doc(discardListId)
   return await discardListRef.update({
     wishListId: wishListId
   })
+}
+
+export const deleteDiscardList = async(userId: string, listId: string) => {
+  const discardListRef = db.collection('users').doc(userId).collection('discardLists').doc(listId)
+  return await discardListRef.delete();
 }

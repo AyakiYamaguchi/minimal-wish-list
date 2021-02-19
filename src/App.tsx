@@ -16,15 +16,20 @@ import AccountSettings from './components/pages/AccountSettings';
 import OnboadingCreateList from './components/pages/OnboadingCreateList';
 import OnboadingDiscard from './components/pages/OnboadingDiscard';
 import OnboadingPriority from './components/pages/OnboadingPriority';
+import LandingPage from './components/pages/LandingPage';
 
 function App() {
   return (
     <Router>
-      <PrivateRoute />
       <Switch>
+        <Route exact path="/">
+          <LandingPage />
+        </Route>
         <Route exact path="/top">
           <TopPage />
         </Route>
+        
+        <PrivateRoute />
         <Route exact path="/onboading-create-list">
           <OnboadingCreateList />
         </Route>

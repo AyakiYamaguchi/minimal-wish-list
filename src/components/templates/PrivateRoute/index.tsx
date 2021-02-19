@@ -4,6 +4,7 @@ import firebase from '../../../apis/FirebaseConf';
 import {AuthContext, SET_USER} from '../../../store/Auth';
 import Loading from '../Loading';
 
+
 const PrivateRoute = () => {
   const { AuthState, setAuthState } = useContext(AuthContext);
   const [loading, setLoading] = useState(true)

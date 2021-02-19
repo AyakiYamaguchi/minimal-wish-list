@@ -1,6 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom';
-import { fetchWishListDetail, updateWishList } from '../../../apis/FirebaseWishList';
+import { fetchWishListDetail, updateWishList, deleteWishList } from '../../../apis/FirebaseWishList';
+import { deleteDiscardList } from '../../../apis/FirebaseDiscardList';
 import { AuthContext } from '../../../store/Auth';
 import { WishList } from '../../../store/index';
 import CommonListForm from '../../organisms/CommonListForm';
@@ -43,7 +44,24 @@ const EditWishList = () => {
         alert(error)
       })
     }
-    
+
+    const deleteList = () => {
+      deleteWishList(uid, id)
+        .then(result=>{
+          // store更新処理を追加
+          if (wishList?.discardListId){
+            deleteDiscardList(uid, wishList.discardListId)
+            .then(result=>{
+              // store更新処理を追加
+            }).catch(error=>{
+              alert(error)
+            })
+          }
+      }).catch(error=>{
+        alert(error)
+      })
+      history.push('/wish-lists')
+    }
   }
   useEffect(()=>{
     if(AuthState.user){

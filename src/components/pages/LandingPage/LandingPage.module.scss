@@ -1,0 +1,61 @@
+@import '../../../styles/variables';
+
+.top_area_wrapper {
+  text-align: center;
+  padding-top: 50px;
+}
+
+.logo_wrapper {
+  margin-bottom: 60px;
+}
+
+.top_message_wrapper {
+  margin-bottom: 30px;
+}
+
+.top_message {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.top_image_background {
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+  transform: rotate(-19deg);
+  border-radius:
+    43% 57% 43% 57% /
+    57% 43% 57% 43%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.top_image {
+  width: 90%;
+  transform: rotate(19deg);
+}
+
+.description {
+  width: 100%;
+  font-size: 1.6rem;
+  width: 70%;
+  text-align: left;
+  line-height: 1.8;
+  margin: 20px auto;
+}
+
+.btn_wrapper {
+  margin: 30px 0 ;
+}
+
+.btn {
+  font-size: 1.6rem;
+  font-weight: bold;
+  padding: 15px 20px;
+  border-radius: 30px;
+  background-color: $keyColorHeavy;
+  color: $baseColorWhite;
+}
