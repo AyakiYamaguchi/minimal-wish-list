@@ -84,6 +84,7 @@ const EditWishList = () => {
           handleSubmit={updateList}
         />
       }
+      <div></div>
     </div>
   )
 }

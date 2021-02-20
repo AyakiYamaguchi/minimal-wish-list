@@ -10,7 +10,7 @@ const OnboadingCreateList = () => {
         title={'あなたのWishリストをつくりましょう'}
         description={description}
         img={MemoImage}
-        linkPath="/onboading-discard"
+        linkPath="/onboading/discard"
         btnText="Next"
         progress={1}
       />

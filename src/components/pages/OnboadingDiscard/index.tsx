@@ -10,7 +10,7 @@ const OnboadingDiscard = () => {
         title={'Wishリストのために手放すものを決めましょう'}
         description={description}
         img={TrashImg}
-        linkPath={'/onboading-priority'}
+        linkPath={'/onboading/priority'}
         btnText={'Next'}
         progress={2}
       />
