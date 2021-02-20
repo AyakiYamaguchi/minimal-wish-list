@@ -21,6 +21,7 @@ import LandingPage from './components/pages/LandingPage';
 function App() {
   return (
     <Router>
+      
       <Switch>
         <Route exact path="/">
           <LandingPage />
@@ -28,44 +29,42 @@ function App() {
         <Route exact path="/top">
           <TopPage />
         </Route>
-        
-        <PrivateRoute />
-        <Route exact path="/onboading-create-list">
+        <PrivateRoute exact path="/onboading/create-list">
           <OnboadingCreateList />
-        </Route>
-        <Route exact path="/onboading-priority">
+        </PrivateRoute>
+        <PrivateRoute exact path="/onboading/priority">
           <OnboadingPriority />
-        </Route>
-        <Route exact path="/onboading-discard">
+        </PrivateRoute>
+        <PrivateRoute exact path="/onboading/discard">
           <OnboadingDiscard />
-        </Route>
-        <Route exact path="/wish-lists">
+        </PrivateRoute>
+        <PrivateRoute exact path="/wish-lists">
           <WishLists />
-        </Route>
-        <Route exact path="/wish-lists/:id">
+        </PrivateRoute>
+        <PrivateRoute exact path="/wish-lists/:id">
           <WishListDetail />
-        </Route>
-        <Route exact path="/create-wishlist">
+        </PrivateRoute>
+        <PrivateRoute exact path="/create-wishlist">
           <CreateWishList />
-        </Route>
-        <Route exact path="/wish-lists/:id/edit">
+        </PrivateRoute>
+        <PrivateRoute exact path="/wish-lists/:id/edit">
           <EditWishList />
-        </Route>
-        <Route exact path="/discard-lists">
+        </PrivateRoute>
+        <PrivateRoute exact path="/discard-lists">
           <DiscardLists />
-        </Route>
-        <Route exact path="/discard-lists/:id">
+        </PrivateRoute>
+        <PrivateRoute exact path="/discard-lists/:id">
           <DiscardListDetail />
-        </Route>
-        <Route exact path="/create-discardlist">
+        </PrivateRoute>
+        <PrivateRoute exact path="/create-discardlist">
           <CreateDiscardList />
-        </Route>
-        <Route exact path="/discard-lists/:id/edit">
+        </PrivateRoute>
+        <PrivateRoute exact path="/discard-lists/:id/edit">
           <EditDiscardList />
-        </Route>
-        <Route exact path="/account-settings">
+        </PrivateRoute>
+        <PrivateRoute exact path="/account-settings">
           <AccountSettings />
-        </Route>
+        </PrivateRoute>
       </Switch>
     </Router>
   );
