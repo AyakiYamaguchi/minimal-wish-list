@@ -65,7 +65,7 @@ const WishLists = () => {
   return (
     <div>
       <Header 
-        title={'Your wish list'}
+        title={'Wishリスト'}
         showAccountSetting={true}
         />
       <Layout>

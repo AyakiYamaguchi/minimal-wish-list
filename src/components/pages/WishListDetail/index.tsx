@@ -12,6 +12,7 @@ import TitleText from '../../atoms/TitleText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faFire } from '@fortawesome/free-solid-svg-icons';
+import MemoForm from '../../organisms/MemoForm';
 
 type RouteParams = {
   id: string;
@@ -56,6 +57,10 @@ const WishListDetail = () => {
         alert(error)
       })
   }
+
+  const addMemo = (values: any) => {
+    alert(values.memo)
+  }
   useEffect(()=>{
     if(AuthState.user){
       getWishList()
@@ -96,6 +101,11 @@ const WishListDetail = () => {
           />
           </section>
         }
+        <section>
+          <MemoForm 
+            handleSubmit={addMemo}
+          />
+        </section>
       </Layout>
     </div>
   )

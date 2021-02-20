@@ -53,7 +53,7 @@ const DiscardLists = () => {
   return (
     <div>
       <Header 
-        title={'Your trash list'}
+        title={'Trashリスト'}
         showAccountSetting={true}
         />
       <Layout>

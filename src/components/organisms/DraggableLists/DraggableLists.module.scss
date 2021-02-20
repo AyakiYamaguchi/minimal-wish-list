@@ -1,12 +1,13 @@
 @import '../../../styles/variables';
 
 .empty_area {
-  width: 80%;
+  width: 90%;
   margin: 40px auto;
+  text-align: center;
 }
 
 .empty_message {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: $unselectedColor;
   padding: 5px 0;
 }

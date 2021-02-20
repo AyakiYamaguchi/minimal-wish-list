@@ -56,7 +56,7 @@ const SignupForm = () => {
               displayName: null,
             }
             setAuthState({type: SET_USER, payload: {user: user}})
-            history.push('/onboading-create-list')
+            history.push('/onboading/create-list')
           }
         })
         .catch((error)=>{
