@@ -48,7 +48,7 @@ type Action =
 { type: 'SET_DISCARD_LISTS', payload: { discardLists: DiscardList[] }} |
 { type: 'CRATE_DISCARD_LIST', payload: { discardList: DiscardList }} |
 { type: 'UPDATE_DISCARD_LIST', payload: { discardList: DiscardList }} |
-{ type: 'DELETE_DISCARD_LIST', payload: { discardList: DiscardList }};
+{ type: 'DELETE_DISCARD_LIST', payload: { discardListId: string }};
 
 const initialState:State = {
   wishLists: [],
@@ -57,9 +57,14 @@ const initialState:State = {
 
 const reducer = (state: State, action: Action ) => {
   switch(action.type){
-    case 'SET_WISH_LISTS':
-      return { ...state, wishLists: action.payload.wishLists }
-    case 'UPDATE_WISH_LIST':
+    case SET_WISH_LISTS:
+      const wishLists = action.payload.wishLists.sort((a,b)=>{
+        if(a.data.priority < b.data.priority) return -1;
+        if(a.data.priority > b.data.priority) return 1;
+        return 0;
+      })
+      return { ...state, wishLists: wishLists }
+    case UPDATE_WISH_LIST:
       const wishList = action.payload.wishList
       const updatedWishLists = state.wishLists.map((list)=>{
         if(list.id === wishList.id){
@@ -67,10 +72,20 @@ const reducer = (state: State, action: Action ) => {
         }
         return list
       })
+      updatedWishLists.sort((a,b)=>{
+        if(a.data.priority < b.data.priority) return -1;
+        if(a.data.priority > b.data.priority) return 1;
+        return 0;
+      })
       return { ...state, wishLists: updatedWishLists}
-    case 'SET_DISCARD_LISTS':
+    case DELETE_WISH_LIST:
+      const daletedWishLists = state.wishLists.filter(list=>
+        list.id !== action.payload.wishListId
+      )
+      return { ...state, wishLists: daletedWishLists }
+    case SET_DISCARD_LISTS:
       return { ...state, discardLists: action.payload.discardLists }
-    case 'UPDATE_DISCARD_LIST':
+    case UPDATE_DISCARD_LIST:
       const discardList = action.payload.discardList
       const updatedDiscardLists = state.discardLists.map(list =>{
         if(list.id === discardList.id){
@@ -79,6 +94,11 @@ const reducer = (state: State, action: Action ) => {
         return list
       })
       return { ...state, discardLists: updatedDiscardLists}
+    case DELETE_DISCARD_LIST:
+      const daletedDiscardLists = state.discardLists.filter(list=>
+        list.id !== action.payload.discardListId
+      )
+      return { ...state, discardLists: daletedDiscardLists }
     default:
       return state
   }

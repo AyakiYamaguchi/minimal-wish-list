@@ -1,12 +1,15 @@
 import React, {useContext, useState, useEffect} from 'react'
+import Style from './EditWishList.module.scss';
 import { useParams } from 'react-router-dom';
 import { fetchWishListDetail, updateWishList, deleteWishList } from '../../../apis/FirebaseWishList';
 import { deleteDiscardList } from '../../../apis/FirebaseDiscardList';
 import { AuthContext } from '../../../store/Auth';
-import { WishList } from '../../../store/index';
+import { WishList, StoreContext, DELETE_WISH_LIST, DELETE_DISCARD_LIST } from '../../../store/index';
 import CommonListForm from '../../organisms/CommonListForm';
 import Header from '../../organisms/Header';
 import { useHistory } from 'react-router-dom';
+import ConfirmDeleteModal from '../../organisms/ConfirmDeleteModal';
+import DeleteButton from '../../atoms/DeleteButton';
 
 type RouteParams = {
   id: string;
@@ -14,10 +17,13 @@ type RouteParams = {
 
 const EditWishList = () => {
   const { AuthState } = useContext(AuthContext);
+  const { setGlobalState } = useContext(StoreContext);
   const uid = AuthState.user.uid;
   const history = useHistory();
   const {id} = useParams<RouteParams>();
   const [ wishList , setWishList ] = useState<WishList>();
+  const [ modalIsOpen, setModalIsOpen ] = useState(false);
+
   const getWishList = () => {
     fetchWishListDetail(uid, id)
       .then( result => {
@@ -44,24 +50,23 @@ const EditWishList = () => {
         alert(error)
       })
     }
-
-    const deleteList = () => {
-      deleteWishList(uid, id)
-        .then(result=>{
-          // store更新処理を追加
-          if (wishList?.discardListId){
-            deleteDiscardList(uid, wishList.discardListId)
-            .then(result=>{
-              // store更新処理を追加
-            }).catch(error=>{
-              alert(error)
-            })
-          }
-      }).catch(error=>{
-        alert(error)
-      })
-      history.push('/wish-lists')
-    }
+  }
+  const deleteList = () => {
+    deleteWishList(uid, id)
+      .then(result=>{
+        setGlobalState({type: DELETE_WISH_LIST, payload: {wishListId: id }})
+        if (wishList?.discardListId){
+          deleteDiscardList(uid, wishList.discardListId)
+          .then(result=>{
+            setGlobalState({type: DELETE_DISCARD_LIST, payload: {discardListId: wishList.discardListId}})
+          }).catch(error=>{
+            alert(error)
+          })
+        }
+    }).catch(error=>{
+      alert(error)
+    })
+    history.push('/wish-lists')
   }
   useEffect(()=>{
     if(AuthState.user){
@@ -84,7 +89,18 @@ const EditWishList = () => {
           handleSubmit={updateList}
         />
       }
-      <div></div>
+      <div className={Style.delete_btn_wrapper}>
+        <DeleteButton 
+          btnText="このリストを削除する"
+          handleClick={()=>setModalIsOpen(true)}
+        />
+      </div>
+      <ConfirmDeleteModal 
+        isOpen={modalIsOpen}
+        confirmMessage={'Wishリストを削除すると、Trashリストも一緒に削除されますがよろしいですか？'}
+        handleDelete={deleteList}
+        handleCancel={()=>setModalIsOpen(false)}
+      />
     </div>
   )
 }

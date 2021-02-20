@@ -1,0 +1,14 @@
+@import '../../../styles/variables';
+
+.confirm_message {
+  font-size: 1.6rem;
+  color: $errorColorMedium;
+  line-height: 1.8;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.btn_wrapper {
+  text-align: center;
+  padding: 5px 0;
+}

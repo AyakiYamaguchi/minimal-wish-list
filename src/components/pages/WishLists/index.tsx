@@ -72,7 +72,7 @@ const WishLists = () => {
         <div className={Style.draggable_area_wrap}>
           <DraggableLists
             listType={'wish-lists'}
-            lists={sortedWisthLists}
+            lists={globalState.wishLists}
             reorderList={reorderWishList}
           />
         </div>
