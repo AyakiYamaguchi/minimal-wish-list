@@ -1,14 +1,20 @@
 @import '../../../styles/variables';
 
-.list_wrapper {
+.content_wrapper {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   background-color: $baseColorWhite;
   padding: 25px 20px;
   border-radius: 7px;
   box-shadow: 2px 5px 10px rgba(80, 80, 80, 0.16);
   margin-bottom: 15px;
+}
+
+.list_wrapper {
+  display: flex;
+  align-items: center;
 }
 
 .list_name {
@@ -22,4 +28,17 @@
   text-align: center;
   margin: 0 3px;
   color: $keyColorHeavy;
+}
+
+.finish_icon {
+  padding: 1.0rem;
+  background-color: $baseColorGrayMedium;
+  border-radius: 50%;
+  color: $baseColorGrayMedium;
+  font-size: 1.4rem
+}
+
+.finished_icon {
+  background-color: $keyColorHeavy;
+  color: white;
 }

@@ -55,3 +55,11 @@ export const deleteDiscardList = async(userId: string, listId: string) => {
   const discardListRef = db.collection('users').doc(userId).collection('discardLists').doc(listId)
   return await discardListRef.delete();
 }
+
+export const changeDidcardListFinished = async(userId: string, listId: string, finished: boolean) => {
+  const discardListRef = db.collection('users').doc(userId).collection('discardLists').doc(listId)
+  return await discardListRef.update({
+    'data.finished': finished,
+    'data.updatedAt': firebase.firestore.Timestamp.now()
+  })
+}

@@ -53,6 +53,7 @@ const DraggableLists:FC<Props> = ({listType, lists, reorderList}) => {
                                 listName={list.data.listName}
                                 iconId={list.data.iconId}
                                 listId={list.id}
+                                finished={list.data.finished}
                               />
                             </li>
                           )}

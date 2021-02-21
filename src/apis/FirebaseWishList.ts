@@ -21,7 +21,7 @@ export const createWishList = async(userId: string, listName: string, iconId: st
       listName: listName,
       iconId: iconId,
       priority: wishListsLength + 1,
-      status: '',
+      finished: false,
       createdAt: firebase.firestore.Timestamp.now(),
       updatedAt: firebase.firestore.Timestamp.now(),
     }
@@ -51,4 +51,10 @@ export const deleteWishList = async(userId: string, listId: string) => {
   return await wishListRef.delete()
 }
 
-
+export const chengeWishListFinished = async(userId: string, listId: string, finished: boolean) => {
+  const wishListRef = db.collection('users').doc(userId).collection('wishLists').doc(listId);
+  return await wishListRef.update({
+    'data.finished': finished,
+    'data.updatedAt': firebase.firestore.Timestamp.now()
+  })
+}
