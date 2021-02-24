@@ -1,9 +1,11 @@
 import React, {FC} from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import TextareaAutosize from 'react-textarea-autosize';
 import Style from './MemoForm.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+
 
 type Props = {
   handleSubmit: Function;
@@ -27,7 +29,7 @@ const MemoForm:FC<Props> = ({handleSubmit}) => {
   return (
     <div>
       <form onSubmit={formik.handleSubmit} className={Style.form_wrapper}>
-        <textarea 
+        <TextareaAutosize 
           id="memo"
           name="memo"
           onChange={formik.handleChange}
