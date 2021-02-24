@@ -1,5 +1,4 @@
 import React ,{ createContext, useReducer, FC } from 'react'
-import { finished } from 'stream';
 
 export type WishList = {
   id: string;
@@ -12,6 +11,7 @@ export type WishList = {
     createdAt: Date;
     updatedAt: Date;
   }
+  memos?: Memo[]
 }
 
 export type DiscardList = {
@@ -25,6 +25,14 @@ export type DiscardList = {
     createdAt: Date;
     updatedAt: Date;
   }
+  memos?: Memo[]
+}
+
+export type Memo = {
+  id: string;
+  text: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 type State = {
@@ -32,16 +40,21 @@ type State = {
   discardLists: DiscardList[];
 }
 
+// WishList
 export const SET_WISH_LISTS = 'SET_WISH_LISTS';
 export const CREATE_WISH_LIST = 'CREATE_WISH_LIST';
 export const UPDATE_WISH_LIST = 'UPDATE_WISH_LIST';
 export const DELETE_WISH_LIST = 'DELETE_WISH_LIST';
+export const CHANGE_WISH_LIST_FINISHED = 'CHANGE_WISH_LIST_FINISHED';
+export const ADD_WISH_LIST_MEMO = 'ADD_WISH_LIST_MEMO';
+
+// DiscardList
 export const SET_DISCARD_LISTS = 'SET_DISCARD_LISTS';
 export const CRATE_DISCARD_LIST = 'CRATE_DISCARD_LIST';
 export const UPDATE_DISCARD_LIST = 'UPDATE_DISCARD_LIST';
 export const DELETE_DISCARD_LIST = 'DELETE_DISCARD_LIST';
-export const CHANGE_WISH_LIST_FINISHED = 'CHANGE_WISH_LIST_FINISHED';
 export const CHANGE_DISCARD_LIST_FINISHED = 'CHANGE_DISCARD_LIST_FINISHED';
+export const ADD_DISCARD_LIST_MEMO = 'ADD_DISCARD_LIST_MEMO';
 
 type Action = 
 { type: 'SET_WISH_LISTS', payload: { wishLists: WishList[] }} |
@@ -53,7 +66,9 @@ type Action =
 { type: 'UPDATE_DISCARD_LIST', payload: { discardList: DiscardList }} |
 { type: 'DELETE_DISCARD_LIST', payload: { discardListId: string }} |
 { type: 'CHANGE_WISH_LIST_FINISHED', payload: { wishListId: string }} |
-{ type: 'CHANGE_DISCARD_LIST_FINISHED', payload: { discardListId: string }};
+{ type: 'CHANGE_DISCARD_LIST_FINISHED', payload: { discardListId: string }}|
+{ type: 'ADD_WISH_LIST_MEMO', payload: { wishListId: string, memo: Memo }}|
+{ type: 'ADD_DISCARD_LIST_MEMO', payload: { discardListId: string, memo: Memo }};
 
 const initialState:State = {
   wishLists: [],
@@ -62,6 +77,7 @@ const initialState:State = {
 
 const reducer = (state: State, action: Action ) => {
   switch(action.type){
+    // WishList関連
     case SET_WISH_LISTS:
       const wishLists = action.payload.wishLists.sort((a,b)=>{
         if(a.data.priority < b.data.priority) return -1;
@@ -88,6 +104,24 @@ const reducer = (state: State, action: Action ) => {
         list.id !== action.payload.wishListId
       )
       return { ...state, wishLists: daletedWishLists }
+      case CHANGE_WISH_LIST_FINISHED:
+      const changedFinishedWishList = state.wishLists.map(list=>{
+        if(list.id === action.payload.wishListId){
+          return {...list, data: {...list.data, finished: !list.data.finished} }
+        }
+        return list
+      })
+      return { ...state, wishLists: changedFinishedWishList }
+    case ADD_WISH_LIST_MEMO: 
+      return { ...state, wishLists: state.wishLists.map(list=>{
+        if(list.id === action.payload.wishListId){
+          list.memos?.push(action.payload.memo)
+          return list
+        }
+        return list
+      })}
+
+    // DiscardList 関連
     case SET_DISCARD_LISTS:
       return { ...state, discardLists: action.payload.discardLists }
     case UPDATE_DISCARD_LIST:
@@ -104,14 +138,6 @@ const reducer = (state: State, action: Action ) => {
         list.id !== action.payload.discardListId
       )
       return { ...state, discardLists: daletedDiscardLists }
-    case CHANGE_WISH_LIST_FINISHED:
-      const changedFinishedWishList = state.wishLists.map(list=>{
-        if(list.id === action.payload.wishListId){
-          return {...list, data: {...list.data, finished: !list.data.finished} }
-        }
-        return list
-      })
-      return { ...state, wishLists: changedFinishedWishList }
     case CHANGE_DISCARD_LIST_FINISHED:
       const changedFinishedDiscardList = state.discardLists.map(list=>{
         if(list.id === action.payload.discardListId){
@@ -120,6 +146,14 @@ const reducer = (state: State, action: Action ) => {
         return list
       })
       return { ...state, discardLists: changedFinishedDiscardList }
+    case ADD_DISCARD_LIST_MEMO: 
+      return { ...state, discardLists: state.discardLists.map(list=>{
+        if(list.id === action.payload.discardListId){
+          list.memos?.push(action.payload.memo)
+          return list
+        }
+        return list
+      })}
     default:
       return state
   }
