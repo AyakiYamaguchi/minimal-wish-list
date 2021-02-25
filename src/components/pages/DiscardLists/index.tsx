@@ -21,6 +21,7 @@ const DiscardLists = () => {
             id: list.id,
             data: list.data().data,
             discardListId: list.data().discardListId,
+            memos: list.data().memos,
           }
           discardLists.push(discardList)
         })

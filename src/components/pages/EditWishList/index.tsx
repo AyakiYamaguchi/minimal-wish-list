@@ -31,7 +31,8 @@ const EditWishList = () => {
           const wishList = {
             id: result.id,
             discardListId: result.data()?.discardListId,
-            data: result.data()?.data
+            data: result.data()?.data,
+            memos: result.data()?.memos,
           }
           setWishList(wishList)
         }

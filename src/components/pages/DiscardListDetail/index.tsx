@@ -31,7 +31,8 @@ const DiscardListDetail = () => {
           const discardList = {
             id: result.id,
             wishListId: result.data()?.wishListId,
-            data: result.data()?.data
+            data: result.data()?.data,
+            memos: result.data()?.memos,
           }
           setDiscardList(discardList)
           if(discardList.wishListId){
@@ -50,7 +51,8 @@ const DiscardListDetail = () => {
           const wishList = {
             id: result.id,
             discardListId: result.data()?.discardListId,
-            data: result.data()?.data
+            data: result.data()?.data,
+            memos: result.data()?.memos,
           }
           setWishList(wishList)
         }

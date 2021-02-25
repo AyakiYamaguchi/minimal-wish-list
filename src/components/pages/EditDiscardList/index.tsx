@@ -39,7 +39,8 @@ const EditDiscardList = () => {
           const discardList = {
             id: result.id,
             discardListId: result.data()?.discardListId,
-            data: result.data()?.data
+            data: result.data()?.data,
+            memos: result.data()?.data,
           }
           setDiscardList(discardList)
         }

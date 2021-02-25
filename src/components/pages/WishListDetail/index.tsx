@@ -2,9 +2,9 @@ import React, { useEffect, useState, useContext } from 'react';
 import ListItemDetail from '../../molecules/ListItemDetail';
 import Style from './WishListDetail.module.scss';
 import { useParams } from 'react-router-dom';
-import { WishList, DiscardList} from '../../../store/index';
+import { StoreContext, WishList, DiscardList, ADD_WISH_LIST_MEMO, Memo } from '../../../store/index';
 import { AuthContext } from '../../../store/Auth';
-import { fetchWishListDetail } from '../../../apis/FirebaseWishList';
+import { fetchWishListDetail, addWishListMemo } from '../../../apis/FirebaseWishList';
 import { fetchDiscardListDetail } from '../../../apis/FirebaseDiscardList';
 import Header from '../../organisms/Header';
 import Layout from '../../templates/Layout';
@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faFire } from '@fortawesome/free-solid-svg-icons';
 import MemoForm from '../../organisms/MemoForm';
+import { memoryUsage } from 'process';
 
 type RouteParams = {
   id: string;
@@ -22,6 +23,7 @@ const WishListDetail = () => {
   const [wishList, setWishList] = useState<WishList>();
   const [discardList, setDiscardList] = useState<DiscardList>();
   const { AuthState } = useContext(AuthContext);
+  const { setGlobalState } = useContext(StoreContext);
   const {id} = useParams<RouteParams>();
   const uid = AuthState.user.uid;
 
@@ -32,7 +34,8 @@ const WishListDetail = () => {
           const wishList = {
             id: result.id,
             discardListId: result.data()?.discardListId,
-            data: result.data()?.data
+            data: result.data()?.data,
+            memos: result.data()?.memos,
           }
           setWishList(wishList)
           getDiscardList(wishList.discardListId)
@@ -49,7 +52,8 @@ const WishListDetail = () => {
           const discardList = {
             id: result.id,
             wishListId: result.data()?.wishListId,
-            data: result.data()?.data
+            data: result.data()?.data,
+            memos: result.data()?.memos,
           }
           setDiscardList(discardList)
         }
@@ -58,8 +62,22 @@ const WishListDetail = () => {
       })
   }
 
-  const addMemo = (values: any) => {
-    alert(values.memo)
+  const addMemo = (values: { memo:string }) => {
+    // alert(values.memo)
+    addWishListMemo(uid, id, values.memo).then(result =>{
+      console.log(result)
+      const memo = {
+        text: values.memo,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      if(wishList){
+        const updatedWishList = {...wishList, memos: [...wishList.memos, memo]}
+        setWishList(updatedWishList)
+      }
+    }).catch(error=>{
+      alert(error)
+    })
   }
   useEffect(()=>{
     if(AuthState.user){

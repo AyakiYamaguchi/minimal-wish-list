@@ -58,3 +58,14 @@ export const chengeWishListFinished = async(userId: string, listId: string, fini
     'data.updatedAt': firebase.firestore.Timestamp.now()
   })
 }
+
+export const addWishListMemo = async(userId: string, listId: string, text: string ) => {
+  const wishListRef = db.collection('users').doc(userId).collection('wishLists').doc(listId);
+  return await wishListRef.update({
+    memos: firebase.firestore.FieldValue.arrayUnion({
+      text: text,
+      createdAt: firebase.firestore.Timestamp.now(),
+      updatedAt: firebase.firestore.Timestamp.now(),
+    })
+  })
+}

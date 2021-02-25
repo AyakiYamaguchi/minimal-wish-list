@@ -1,5 +1,11 @@
 import React ,{ createContext, useReducer, FC } from 'react'
 
+export type Memo = {
+  text: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export type WishList = {
   id: string;
   discardListId: string;
@@ -11,7 +17,7 @@ export type WishList = {
     createdAt: Date;
     updatedAt: Date;
   }
-  memos?: Memo[]
+  memos: Memo[];
 }
 
 export type DiscardList = {
@@ -25,15 +31,9 @@ export type DiscardList = {
     createdAt: Date;
     updatedAt: Date;
   }
-  memos?: Memo[]
+  memos: Memo[];
 }
 
-export type Memo = {
-  id: string;
-  text: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
 
 type State = {
   wishLists: WishList[];

@@ -21,6 +21,7 @@ const WishLists = () => {
             id: list.id,
             data: list.data().data,
             discardListId: list.data().discardListId,
+            memos: list.data().memos,
           }
           wishLists.push(wishList)
         })
