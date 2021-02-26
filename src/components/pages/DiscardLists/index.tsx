@@ -5,7 +5,7 @@ import DraggableLists from '../../organisms/DraggableLists'
 import Footer from '../../organisms/Footer'
 import Header from '../../organisms/Header'
 import Layout from '../../templates/Layout'
-import { StoreContext, DiscardList, SET_DISCARD_LISTS, UPDATE_DISCARD_LIST } from '../../../store';
+import { StoreContext, DiscardList, SET_DISCARD_LISTS } from '../../../store';
 import { AuthContext } from '../../../store/Auth';
 import { fetchDiscardLists, updateDiscardListPriority } from '../../../apis/FirebaseDiscardList';
 
@@ -32,18 +32,21 @@ const DiscardLists = () => {
   }
 
   const reorderDiscardList = (items:DiscardList[]) => {
-    const updatedWishLists: DiscardList[] = []
+    const updatedDiscardLists: DiscardList[] = []
+    items.map((list, index) => {
+      const currentPriority = index + 1
+      if(list.data.priority !== currentPriority){
+        const discardList = {...list, data: {...list.data , priority: currentPriority }}
+        updatedDiscardLists.push(discardList)
+      }
+    })
+    setGlobalState({type: SET_DISCARD_LISTS, payload: {discardLists: updatedDiscardLists }})
+  }
+  const updateFirestoreDiscardList = (items:DiscardList[]) => {
     items.map((list, index) => {
       const currentPriority = index + 1
       if(list.data.priority !== currentPriority){
         updateDiscardListPriority(AuthState.user.uid, list.id, currentPriority)
-          .then(()=>{
-            const discardList = {...list, data: {...list.data , priority: currentPriority }}
-            setGlobalState({type: UPDATE_DISCARD_LIST, payload:{discardList: discardList}})
-            updatedWishLists.push(discardList)
-          }).catch((error)=>{
-            alert(error)
-          })
       }
     })
   }
@@ -63,7 +66,7 @@ const DiscardLists = () => {
             listType={'discard-lists'}
             lists={globalState.discardLists}
             reorderList={reorderDiscardList}
-            updateFirestoreList={()=>{}}
+            updateFirestoreList={updateFirestoreDiscardList}
           />
         </div>
         <div className={Style.btn_wrap}>

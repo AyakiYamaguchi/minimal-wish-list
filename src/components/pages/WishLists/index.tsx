@@ -3,7 +3,7 @@ import Style from './WishLists.module.scss';
 import DraggableLists from '../../organisms/DraggableLists';
 import { fetchWishLists, updateWishListPriority } from '../../../apis/FirebaseWishList';
 import { AuthContext } from '../../../store/Auth';
-import { StoreContext, SET_WISH_LISTS, WishList, UPDATE_WISH_LIST } from '../../../store';
+import { StoreContext, SET_WISH_LISTS, WishList } from '../../../store';
 import Footer from '../../organisms/Footer';
 import Header from '../../organisms/Header';
 import FloatingAddButton from '../../atoms/FloatingAddButton';
