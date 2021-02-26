@@ -1,0 +1,12 @@
+@import '../../../styles/variables';
+
+.icon_wrap {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.icon {
+  color: $fontColorGray;
+  font-size: 2.4rem;
+  transform:rotate(90deg);
+}

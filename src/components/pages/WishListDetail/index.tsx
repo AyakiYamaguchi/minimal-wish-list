@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, memo } from 'react';
+import React, { useEffect, useState, useContext, useCallback} from 'react';
 import ListItemDetail from '../../molecules/ListItemDetail';
 import Style from './WishListDetail.module.scss';
 import { useParams } from 'react-router-dom';
@@ -14,6 +14,7 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faFire } from '@fortawesome/free-solid-svg-icons';
 import MemoForm from '../../organisms/MemoForm';
 import MemoLists from '../../organisms/MemoLists';
+import ExchangeArrow from '../../atoms/ExchangeArrow';
 
 
 type RouteParams = {
@@ -69,6 +70,14 @@ const WishListDetail = () => {
       })
   }
 
+  // const ref = React.createRef<HTMLDivElement>()
+  // const scrollDateList = useCallback(() => {
+  //     ref!.current!.scrollIntoView({
+  //       behavior: 'auto',
+  //       block: 'nearest',
+  //     })
+  //   },[ ref ],)
+
   const addMemo = (values: { memo:string }) => {
     addWishListMemo(uid, id, values.memo).then(result =>{
       console.log(result)
@@ -113,16 +122,18 @@ const WishListDetail = () => {
           </section>
         }
         {  discardList &&
+          
           <section>
-          <div className={Style.title_wrap}>
-            <FontAwesomeIcon icon={faTrashAlt} className={Style.icon}/>
-            <TitleText title={'Wishリストのために手放すこと'}/>
-          </div>
-          <ListItemDetail 
-            listName={discardList.data.listName}
-            iconId={discardList.data.iconId}
-            editPath={'/discard-lists/'+ discardList.id + '/edit'}
-          />
+            <ExchangeArrow />
+            <div className={Style.title_wrap}>
+              <FontAwesomeIcon icon={faTrashAlt} className={Style.icon}/>
+              <TitleText title={'Wishリストと引き換えに手放すもの'}/>
+            </div>
+            <ListItemDetail 
+              listName={discardList.data.listName}
+              iconId={discardList.data.iconId}
+              editPath={'/discard-lists/'+ discardList.id + '/edit'}
+            />
           </section>
         }
         { wishList?.memos &&
@@ -135,6 +146,7 @@ const WishListDetail = () => {
             />
           </section>
         }
+        {/* <div ref={ref}></div> */}
       </Layout>
       <MemoForm 
           handleSubmit={addMemo}

@@ -52,4 +52,13 @@
   font-size: 1.4rem;
   color: $fontColorBlack;
   line-height: 1.8rem;
+  white-space: pre-wrap;
+
+  a {
+    color: $linkColor;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
 }

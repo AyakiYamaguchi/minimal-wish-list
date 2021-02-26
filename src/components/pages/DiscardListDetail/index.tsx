@@ -12,6 +12,7 @@ import Header from '../../organisms/Header';
 import Layout from '../../templates/Layout';
 import TitleText from '../../atoms/TitleText';
 import ListItemDetail from '../../molecules/ListItemDetail';
+import ExchangeArrow from '../../atoms/ExchangeArrow';
 
 type RouteParams = {
   id: string;
@@ -79,7 +80,7 @@ const DiscardListDetail = () => {
           <section>
           <div className={Style.title_wrap}>
             <FontAwesomeIcon icon={faTrashAlt} className={Style.icon}/>
-            <TitleText title={'手放すもの・やめること'}/>
+            <TitleText title={'Trashリスト'}/>
           </div>
           <ListItemDetail 
             listName={discardList.data.listName}
@@ -90,9 +91,10 @@ const DiscardListDetail = () => {
         }
         { wishList &&
           <section>
+            <ExchangeArrow />
             <div className={Style.title_wrap}>
               <FontAwesomeIcon icon={faFire} className={Style.icon}/>
-              <TitleText title={'新たに手に入れたいもの・やりたいこと'}/>
+              <TitleText title={'代りに手に入れたいもの・こと'}/>
             </div>
             <ListItemDetail 
               listName={wishList.data.listName}

@@ -22,8 +22,9 @@ const MemoForm:FC<Props> = ({handleSubmit}) => {
       memo: '',
     },
     validationSchema: validation,
-    onSubmit: values => {
+    onSubmit: (values, submitProps) => {
       handleSubmit(values)
+      submitProps.resetForm({})
     }
   })
   return (
