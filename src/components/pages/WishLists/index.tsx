@@ -31,38 +31,30 @@ const WishLists = () => {
       })
   }
 
-  const sortedWisthLists = globalState.wishLists.sort((a,b)=>{
-    if(a.data.priority < b.data.priority) return -1;
-    if(a.data.priority > b.data.priority) return 1;
-    return 0;
-  })
-
   const reorderWishList = (items: WishList[]) => {
     const updatedWishLists: WishList[] = []
+    items.map(async (list, index) => {
+      const currentPriority = index + 1
+      if(list.data.priority !== currentPriority){
+          const wishList = {...list, data: {...list.data , priority: currentPriority }}
+          updatedWishLists.push(wishList)
+      }
+    })
+    setGlobalState({type: SET_WISH_LISTS, payload: {wishLists: updatedWishLists}})
+  }
+  const updateFirestoreWishList = async (items: WishList[]) => {
     items.map((list, index) => {
       const currentPriority = index + 1
       if(list.data.priority !== currentPriority){
-          updateWishListPriority(AuthState.user.uid, list.id, currentPriority)
-          .then(()=>{
-            const wishList = {...list, data: {...list.data , priority: currentPriority }}
-            setGlobalState({type: UPDATE_WISH_LIST, payload:{wishList: wishList}})
-            updatedWishLists.push(wishList)
-            console.log(wishList)
-            console.log('--------')
-            console.log(updatedWishLists)
-            console.log('--------')
-          }).catch((error)=>{
-            alert(error)
-          })
+        updateWishListPriority(AuthState.user.uid, list.id, currentPriority)
       }
     })
-    console.log(updatedWishLists)
-    // setGlobalState({type: SET_WISH_LISTS, payload: {wishLists: updatedWishLists}})
   }
   
   useEffect(()=>{
     setWishLists()
   },[AuthState.user.uid])
+
   return (
     <div>
       <Header 
@@ -75,6 +67,7 @@ const WishLists = () => {
             listType={'wish-lists'}
             lists={globalState.wishLists}
             reorderList={reorderWishList}
+            updateFirestoreList={updateFirestoreWishList}
           />
         </div>
         <div className={Style.btn_wrap}>

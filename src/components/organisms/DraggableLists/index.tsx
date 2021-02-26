@@ -7,13 +7,28 @@ type Props = {
   listType: 'wish-lists' | 'discard-lists'
   lists: any[];
   reorderList: Function;
+  updateFirestoreList: Function;
 }
 
-const DraggableLists:FC<Props> = ({listType, lists, reorderList}) => {
+const DraggableLists:FC<Props> = ({listType, lists, reorderList, updateFirestoreList}) => {
+
+  // const onDragUpdate = (result: any) => {
+  //   if(!result.destination){
+  //     return;
+  //   }
+  //   // 並び替え前後で順番が変わっていない場合
+  //   if (result.destination.index === result.source.index) {
+  //     return;
+  //   }
+  //   const items = Array.from(lists);
+  //   const [reorderedItems] = items.splice(result.source.index, 1);
+  //   items.splice(result.destination.index, 0, reorderedItems)
+
+  //   reorderList(items)
+  // }
 
   const onDragEnd = (result:any) => {
-    console.log('-----並び替え前-----')
-    console.log(result)
+    console.log('-----並び替え前-----',result)
     // 並び替えされていない場合
     if(!result.destination){
       return;
@@ -25,8 +40,8 @@ const DraggableLists:FC<Props> = ({listType, lists, reorderList}) => {
     const items = Array.from(lists);
     const [reorderedItems] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItems)
-
     reorderList(items)
+    updateFirestoreList(items)
   }
   return (
     <div>

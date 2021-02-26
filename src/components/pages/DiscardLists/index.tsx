@@ -63,6 +63,7 @@ const DiscardLists = () => {
             listType={'discard-lists'}
             lists={globalState.discardLists}
             reorderList={reorderDiscardList}
+            updateFirestoreList={()=>{}}
           />
         </div>
         <div className={Style.btn_wrap}>
