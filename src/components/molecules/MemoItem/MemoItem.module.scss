@@ -1,0 +1,55 @@
+@import '../../../styles/variables';
+
+.wrapper {
+  
+  display: flex;
+  width: 100%;
+}
+
+.timeline {
+  position: relative;
+}
+
+.icon_wrapper {
+  height: 30px;
+  width: 30px;
+  background-color: $keyColorHeavy;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  color: $baseColorWhite;
+  font-size: 1.4rem;
+}
+
+.timeline::before {
+  position: absolute;
+  content: '';
+  top: 30px;
+  bottom: 0;
+  left: 14px;
+  width: 2px;
+  background: $baseColorGrayMedium;
+}
+
+.memo_wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  margin-bottom: 20px;
+}
+
+.memo_history {
+  font-size: 1.2rem;
+  color: $fontColorGray;
+  margin-bottom: 10px;
+}
+
+.memo_text {
+  font-size: 1.4rem;
+  color: $fontColorBlack;
+  line-height: 1.8rem;
+}

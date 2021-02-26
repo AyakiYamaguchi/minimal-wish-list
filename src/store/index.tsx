@@ -2,8 +2,8 @@ import React ,{ createContext, useReducer, FC } from 'react'
 
 export type Memo = {
   text: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: any;
+  updatedAt: any;
 }
 
 export type WishList = {

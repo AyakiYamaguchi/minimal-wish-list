@@ -1,5 +1,9 @@
 @import '../../../styles/variables';
 
+.content_wrapper {
+  // position: relative;
+}
+
 .title_wrap {
   display: flex;
   align-items: center;
@@ -12,4 +16,8 @@
   font-size: 1.8rem;
   margin-right: 7px;
   color: $keyColorHeavy;
+}
+
+.memo_wrapper {
+  margin-bottom: 130px;
 }

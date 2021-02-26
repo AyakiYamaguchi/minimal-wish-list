@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, memo } from 'react';
 import ListItemDetail from '../../molecules/ListItemDetail';
 import Style from './WishListDetail.module.scss';
 import { useParams } from 'react-router-dom';
@@ -13,7 +13,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faFire } from '@fortawesome/free-solid-svg-icons';
 import MemoForm from '../../organisms/MemoForm';
-import { memoryUsage } from 'process';
+import MemoLists from '../../organisms/MemoLists';
+
 
 type RouteParams = {
   id: string;
@@ -35,7 +36,14 @@ const WishListDetail = () => {
             id: result.id,
             discardListId: result.data()?.discardListId,
             data: result.data()?.data,
-            memos: result.data()?.memos,
+            memos: result.data()?.memos && result.data()?.memos.map((list: any)=>{
+              const memo = {
+                ...list,
+                createdAt: list.createdAt.toDate(),
+                updatedAt: list.updatedAt.toDate(),
+              }
+              return memo
+            }),
           }
           setWishList(wishList)
           getDiscardList(wishList.discardListId)
@@ -44,7 +52,6 @@ const WishListDetail = () => {
         alert(error)
       ])
   }
-
   const getDiscardList = (discardListId: string) => {
     fetchDiscardListDetail(uid, discardListId)
       .then( result => {
@@ -63,7 +70,6 @@ const WishListDetail = () => {
   }
 
   const addMemo = (values: { memo:string }) => {
-    // alert(values.memo)
     addWishListMemo(uid, id, values.memo).then(result =>{
       console.log(result)
       const memo = {
@@ -86,7 +92,7 @@ const WishListDetail = () => {
   },[AuthState.user])
   
   return (
-    <div>
+    <div className={Style.constent_wrapper}>
       <Header 
         title={'リスト詳細'}
         backBtnUrl={'/wish-lists'}
@@ -119,12 +125,20 @@ const WishListDetail = () => {
           />
           </section>
         }
-        <section>
-          <MemoForm 
-            handleSubmit={addMemo}
-          />
-        </section>
+        { wishList?.memos &&
+          <section className={Style.memo_wrapper}>
+            <div className={Style.title_wrap}>
+              <TitleText title={'memo'}/>
+            </div>
+            <MemoLists 
+              memos={wishList.memos}
+            />
+          </section>
+        }
       </Layout>
+      <MemoForm 
+          handleSubmit={addMemo}
+        />
     </div>
   )
 }
