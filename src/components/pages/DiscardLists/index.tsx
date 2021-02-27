@@ -35,10 +35,8 @@ const DiscardLists = () => {
     const updatedDiscardLists: DiscardList[] = []
     items.map((list, index) => {
       const currentPriority = index + 1
-      if(list.data.priority !== currentPriority){
-        const discardList = {...list, data: {...list.data , priority: currentPriority }}
-        updatedDiscardLists.push(discardList)
-      }
+      const discardList = {...list, data: {...list.data , priority: currentPriority }}
+      updatedDiscardLists.push(discardList)
     })
     setGlobalState({type: SET_DISCARD_LISTS, payload: {discardLists: updatedDiscardLists }})
   }

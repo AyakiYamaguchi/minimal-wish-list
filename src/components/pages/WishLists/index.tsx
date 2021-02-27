@@ -35,10 +35,8 @@ const WishLists = () => {
     const updatedWishLists: WishList[] = []
     items.map(async (list, index) => {
       const currentPriority = index + 1
-      if(list.data.priority !== currentPriority){
-          const wishList = {...list, data: {...list.data , priority: currentPriority }}
-          updatedWishLists.push(wishList)
-      }
+      const wishList = {...list, data: {...list.data , priority: currentPriority }}
+      updatedWishLists.push(wishList)
     })
     setGlobalState({type: SET_WISH_LISTS, payload: {wishLists: updatedWishLists}})
   }
