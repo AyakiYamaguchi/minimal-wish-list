@@ -4,13 +4,13 @@ import MemoItem from '../../molecules/MemoItem';
 import { Memo } from '../../../store/index';
 
 type Props = {
-  memos: Memo[]
+  memos?: Memo[]
 }
 
 const MemoLists:FC<Props> = ({memos}) => {
   return (
     <div className={Style.wrapper}>
-      {
+      { memos ?
         memos.map(memo=> {
           return (
             <MemoItem 
@@ -18,6 +18,8 @@ const MemoLists:FC<Props> = ({memos}) => {
             />
           )
         })
+        :
+        <div>まだメモは登録されていません</div>
       }
     </div>
   )

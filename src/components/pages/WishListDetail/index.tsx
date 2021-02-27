@@ -87,7 +87,10 @@ const WishListDetail = () => {
         updatedAt: new Date(),
       };
       if(wishList){
-        const updatedWishList = {...wishList, memos: [...wishList.memos, memo]}
+        const updatedWishList = {
+          ...wishList,
+          memos: wishList.memos ? [...wishList.memos, memo] : [memo]
+        }
         setWishList(updatedWishList)
       }
     }).catch(error=>{

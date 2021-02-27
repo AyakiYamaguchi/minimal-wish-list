@@ -63,3 +63,14 @@ export const changeDidcardListFinished = async(userId: string, listId: string, f
     'data.updatedAt': firebase.firestore.Timestamp.now()
   })
 }
+
+export const addDiscardListMemo = async(userId: string, listId: string, text: string ) => {
+  const discardListRef = db.collection('users').doc(userId).collection('discardLists').doc(listId)
+  return await discardListRef.update({
+    memos: firebase.firestore.FieldValue.arrayUnion({
+      text: text,
+      createdAt: firebase.firestore.Timestamp.now(),
+      updatedAt: firebase.firestore.Timestamp.now(),
+    })
+  })
+}
