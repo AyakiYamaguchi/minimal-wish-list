@@ -11,7 +11,7 @@ import { faFire } from '@fortawesome/free-solid-svg-icons';
 import Header from '../../organisms/Header';
 import Layout from '../../templates/Layout';
 import TitleText from '../../atoms/TitleText';
-import ListItemDetail from '../../molecules/ListItemDetail';
+import ListItemDetail from '../../organisms/ListItemDetail';
 import ExchangeArrow from '../../atoms/ExchangeArrow';
 import MemoLists from '../../organisms/MemoLists';
 import MemoForm from '../../organisms/MemoForm';
@@ -113,6 +113,7 @@ const DiscardListDetail = () => {
           </div>
           <ListItemDetail 
             listName={discardList.data.listName}
+            fixedDate={discardList.data.fixedDate}
             iconId={discardList.data.iconId}
             editPath={'/discard-lists/'+ discardList.id + '/edit'}
           />

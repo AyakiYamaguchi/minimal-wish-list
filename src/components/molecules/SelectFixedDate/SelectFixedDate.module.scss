@@ -1,0 +1,30 @@
+@import '../../../styles/variables';
+
+.content_wrapper {
+  position: relative;
+} 
+
+.select_date_box_wrapper {
+  display: flex;
+  width: 130px;
+  align-items: center;
+  padding: 10px 0;
+  // border-bottom: 1px solid $baseColorGrayMedium;
+  background-color: $baseColorWhite;
+  cursor: pointer;
+}
+
+.icon {
+  font-size: 1.4rem;
+  color: $unselectedColor;
+  margin-right: 8px;
+}
+
+.select_date {
+  font-size: 1.4rem;
+}
+
+.empty {
+  font-size: 1.4rem;
+  color: $unselectedColor;
+}

@@ -6,6 +6,12 @@ export type Memo = {
   updatedAt: any;
 }
 
+export type fixedDate = {
+  year: number;
+  month: number;
+  date: number;
+}
+
 export type WishList = {
   id: string;
   discardListId: string;
@@ -14,6 +20,7 @@ export type WishList = {
     iconId: string;
     priority: number;
     finished: boolean;
+    fixedDate?: fixedDate;
     createdAt: Date;
     updatedAt: Date;
   }
@@ -28,6 +35,7 @@ export type DiscardList = {
     iconId: string;
     priority: number;
     finished: boolean;
+    fixedDate?: fixedDate;
     createdAt: Date;
     updatedAt: Date;
   }

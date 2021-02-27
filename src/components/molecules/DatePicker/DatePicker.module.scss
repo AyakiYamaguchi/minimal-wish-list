@@ -1,0 +1,104 @@
+@import '../../../styles/variables';
+
+.calendar_wrapper {
+  background-color: $baseColorWhite;
+  border-radius: 7px;
+  max-width: 400px;
+  padding: 20px 20px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 100;
+  box-shadow: 2px 5px 10px rgba(80, 80, 80, 0.16);
+}
+
+.calendarHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10px;
+  color: $fontColorBlack;
+
+  &__title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  &__button{
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: $keyColorHeavy;
+    margin: 0 15px;
+    padding: 5px 5px;
+    border: 1px solid $keyColorMedium;
+    border-radius: 5px;
+  }
+}
+
+.table {
+  width: 100%;
+  text-align: center;
+}
+
+.tableHeader {
+  tr {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  th {
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 1.4rem;
+    color: $fontColorBlack;
+  }
+}
+.date_wrapper {
+  text-align: center;
+}
+
+.dateItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.dateItem__selected {
+  background-color: $keyColorHeavy;
+  color: $baseColorWhite;
+  font-weight: bold;
+}
+
+.button_wrapper {
+  padding: 0 10%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete_button {
+  font-size: 1.4rem;
+  padding: 10px 15px;
+  border: 1px solid $errorColorMedium;
+  border-radius: 30px;
+  color: $errorColorMedium;
+  font-weight: bold;
+}
+
+.submit_button {
+  font-size: 1.4rem;
+  padding: 10px 15px;
+  background-color: $keyColorHeavy;
+  border-radius: 30px;
+  color: $baseColorWhite;
+  font-weight: bold;
+}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext, useCallback} from 'react';
-import ListItemDetail from '../../molecules/ListItemDetail';
+import ListItemDetail from '../../organisms/ListItemDetail';
 import Style from './WishListDetail.module.scss';
 import { useParams } from 'react-router-dom';
 import { StoreContext, WishList, DiscardList, ADD_WISH_LIST_MEMO, Memo } from '../../../store/index';
