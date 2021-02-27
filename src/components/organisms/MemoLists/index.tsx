@@ -19,7 +19,7 @@ const MemoLists:FC<Props> = ({memos}) => {
           )
         })
         :
-        <div>まだメモは登録されていません</div>
+        <div className={Style.empty}>メモはありません</div>
       }
     </div>
   )
