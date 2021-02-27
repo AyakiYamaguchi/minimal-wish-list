@@ -19,7 +19,7 @@ export const createDiscardList = async(userId:string, listName: string, iconId: 
       listName: listName,
       iconId: iconId,
       priority: discardListsLength + 1,
-      status: '',
+      finished: false,
       createdAt: firebase.firestore.Timestamp.now(),
       updatedAt: firebase.firestore.Timestamp.now(),
     }
@@ -72,5 +72,13 @@ export const addDiscardListMemo = async(userId: string, listId: string, text: st
       createdAt: firebase.firestore.Timestamp.now(),
       updatedAt: firebase.firestore.Timestamp.now(),
     })
+  })
+}
+
+export const setFixedDate = async(userId: string, listId: string, fixedDate: {}) => {
+  const discardListRef = db.collection('users').doc(userId).collection('discardLists').doc(listId)
+  return await discardListRef.update({
+    'data.fixedDate': fixedDate,
+    'data.updatedAt':firebase.firestore.Timestamp.now(),
   })
 }

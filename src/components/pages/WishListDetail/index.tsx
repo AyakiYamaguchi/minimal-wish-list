@@ -117,7 +117,10 @@ const WishListDetail = () => {
               <FontAwesomeIcon icon={faFire} className={Style.icon}/>
               <TitleText title={'Wishリスト'}/>
             </div>
-            <ListItemDetail 
+            <ListItemDetail
+              uid={uid}
+              listType={'wish'}
+              listId={id}
               listName={wishList.data.listName}
               iconId={wishList.data.iconId}
               editPath={'/wish-lists/'+ id + '/edit'}
@@ -133,6 +136,9 @@ const WishListDetail = () => {
               <TitleText title={'Wishリストと引き換えに手放すもの'}/>
             </div>
             <ListItemDetail 
+              uid={uid}
+              listType={'discard'}
+              listId={discardList.id}
               listName={discardList.data.listName}
               iconId={discardList.data.iconId}
               editPath={'/discard-lists/'+ discardList.id + '/edit'}

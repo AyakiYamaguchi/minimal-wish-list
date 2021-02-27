@@ -6,18 +6,30 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import SelectFixedDate from '../../molecules/SelectFixedDate';
+import { setFixedDate } from '../../../apis/FirebaseDiscardList';
 
 type Props = {
+  uid: string;
+  listType: 'wish' | 'discard';
+  listId: string;
   listName: string;
   iconId: string;
   fixedDate?: fixedDate;
   editPath: string;
 }
 
-const ListItemDetail:FC<Props> = ({listName, iconId, editPath,fixedDate}) => {
+const ListItemDetail:FC<Props> = ({uid, listType, listId, listName, iconId, editPath,fixedDate}) => {
   const handleSelectDate = (selectedDate: number) => {
     // 期限日の更新処理
   }
+  const updateFixedDate = (fixedDate:fixedDate) => {
+    if(listType === 'wish'){
+      
+    } else if (listType === 'discard'){
+      setFixedDate(uid, listId, fixedDate)
+    }
+  }
+
   return (
     <div className={Style.wrapper}>
       <div className={Style.list_wrap}>
@@ -31,6 +43,7 @@ const ListItemDetail:FC<Props> = ({listName, iconId, editPath,fixedDate}) => {
         <SelectFixedDate 
           currentDate={fixedDate}
           handleSelectDate={handleSelectDate }
+          updateFixedDate={updateFixedDate}
         />
       </div>
     </div>
