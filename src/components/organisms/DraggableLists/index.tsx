@@ -69,6 +69,7 @@ const DraggableLists:FC<Props> = ({listType, lists, reorderList, updateFirestore
                                 iconId={list.data.iconId}
                                 listId={list.id}
                                 finished={list.data.finished}
+                                fixedDate={list.data.fixedDate}
                               />
                             </li>
                           )}

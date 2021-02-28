@@ -73,11 +73,16 @@
   cursor: pointer;
 }
 
+.dateItem__today {
+  background-color: $keyColorLight;
+}
+
 .dateItem__selected {
   background-color: $keyColorHeavy;
   color: $baseColorWhite;
   font-weight: bold;
 }
+
 
 .button_wrapper {
   padding: 0 10%;

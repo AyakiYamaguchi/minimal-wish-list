@@ -7,9 +7,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFire } from '@fortawesome/free-solid-svg-icons';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
 import { chengeWishListFinished } from '../../../apis/FirebaseWishList';
 import { changeDidcardListFinished } from '../../../apis/FirebaseDiscardList';
-import { StoreContext, CHANGE_WISH_LIST_FINISHED, CHANGE_DISCARD_LIST_FINISHED} from '../../../store/index';
+import { StoreContext, CHANGE_WISH_LIST_FINISHED, CHANGE_DISCARD_LIST_FINISHED, fixedDate} from '../../../store/index';
 
 type Props = {
   listType: string;
@@ -17,9 +18,10 @@ type Props = {
   iconId: string;
   listId: string;
   finished: boolean;
+  fixedDate: fixedDate;
 }
 
-const ListItem:FC<Props> = ({listType, listName, iconId, listId , finished}) => {
+const ListItem:FC<Props> = ({listType, listName, iconId, listId , finished, fixedDate}) => {
   const { AuthState } = useContext(AuthContext);
   const { setGlobalState } = useContext(StoreContext);
   const uid = AuthState.user.uid
@@ -50,8 +52,16 @@ const ListItem:FC<Props> = ({listType, listName, iconId, listId , finished}) => 
                 <FontAwesomeIcon icon={faTrashAlt} className={Style.icon}/>
           }
           <div className={Style.list_name}>{listName}</div>
-          
         </div>
+        <div className={Style.fixedDate_wrap}>
+          <FontAwesomeIcon icon={faCalendarAlt} className={Style.fixedDate_icon}/>
+          { fixedDate ? 
+            <div className={Style.fixedDate}>{fixedDate.year + '/' + fixedDate.month + '/' + fixedDate.date}</div>
+            :
+            <div className={Style.fixedDate_empty}>期日なし</div>
+          }
+        </div>
+        
       </Link>
       <div 
         className={`${Style.finish_icon} ${finished && Style.finished_icon}`}

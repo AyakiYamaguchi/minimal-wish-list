@@ -38,7 +38,9 @@ const SelectFixedDate:FC<Props> = ({handleSelectDate, currentDate, setFixedDate,
 
   const handleSubmit = () => {
     setOpenPicker(false)
-    setFixedDate(selectedDate)
+    if(selectedDate){
+      setFixedDate(selectedDate)
+    }
   }
 
   const handleDelete = () => {
@@ -65,7 +67,7 @@ const SelectFixedDate:FC<Props> = ({handleSelectDate, currentDate, setFixedDate,
       
       <DatePicker 
         isOpen={openPicker}
-        selectedDate={setDate()}
+        selectedDate={selectedDate}
         handleSelect={handleSelect}
         handleSubmit={handleSubmit}
         handleDelete={handleDelete}

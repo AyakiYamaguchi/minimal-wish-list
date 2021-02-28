@@ -4,7 +4,7 @@ import { getCalendarDays } from '../../../helper/dateHelper';
 import { date } from 'yup';
 
 type Props = {
-  selectedDate: {
+  selectedDate?: {
     year: number;
     month: number;
     date: number;
@@ -16,10 +16,16 @@ type Props = {
 }
 
 const DatePicker:FC<Props> = ({selectedDate, handleSelect, isOpen, handleSubmit, handleDelete}) => {
-  const [year, setYear] = useState(selectedDate.year);
-  const [month , setMonth] = useState(selectedDate.month);
+  const today = {
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+    date: new Date().getDate()
+  }
+  const [year, setYear] = useState( selectedDate ? selectedDate.year : today.year);
+  const [month , setMonth] = useState(selectedDate ? selectedDate.month : today.month );
   const days = getCalendarDays(year,month);
-  const selectedDateStr = selectedDate.year + '' + selectedDate.month + selectedDate.date;
+  const selectedDateStr = selectedDate?.year + '' + selectedDate?.month + selectedDate?.date;
+  const todayStr = today.year + '' + today.month + today.date;
 
   const clickDate = (date: number) => {
     const updateDate = {
@@ -79,6 +85,7 @@ const DatePicker:FC<Props> = ({selectedDate, handleSelect, isOpen, handleSubmit,
                                 className={`
                                   ${Style.dateItem} 
                                   ${selectedDateStr === calendarDate && Style.dateItem__selected} 
+                                  ${todayStr === calendarDate && Style.dateItem__today}
                                 `} 
                                 onClick={()=> clickDate(dateItem)}
                               >
