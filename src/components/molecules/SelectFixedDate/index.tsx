@@ -8,9 +8,10 @@ import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
 type Props = {
   currentDate?: fixedDate;
   handleSelectDate: Function;
-  updateFixedDate: Function;
+  setFixedDate: Function;
+  deleteFixedDate: Function;
 }
-const SelectFixedDate:FC<Props> = ({handleSelectDate, currentDate, updateFixedDate}) => {
+const SelectFixedDate:FC<Props> = ({handleSelectDate, currentDate, setFixedDate, deleteFixedDate}) => {
   const [selectedDate, setSelectedDate] = useState(currentDate)
   const [openPicker, setOpenPicker] = useState(false)
   const handleSelect = (clickDate: fixedDate) => {
@@ -37,12 +38,12 @@ const SelectFixedDate:FC<Props> = ({handleSelectDate, currentDate, updateFixedDa
 
   const handleSubmit = () => {
     setOpenPicker(false)
-    updateFixedDate(selectedDate)
+    setFixedDate(selectedDate)
   }
 
   const handleDelete = () => {
     setSelectedDate(undefined)
-    updateFixedDate(undefined)
+    deleteFixedDate()
     setOpenPicker(false)
   }
 

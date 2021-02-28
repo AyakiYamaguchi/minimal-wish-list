@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import SelectFixedDate from '../../molecules/SelectFixedDate';
-import { setFixedDate } from '../../../apis/FirebaseDiscardList';
+import { setDiscardFixedDate, deleteDiscardFixedDate } from '../../../apis/FirebaseDiscardList';
 
 type Props = {
   uid: string;
@@ -22,11 +22,19 @@ const ListItemDetail:FC<Props> = ({uid, listType, listId, listName, iconId, edit
   const handleSelectDate = (selectedDate: number) => {
     // 期限日の更新処理
   }
-  const updateFixedDate = (fixedDate:fixedDate) => {
+  const handleSetFixedDate = (fixedDate:fixedDate) => {
     if(listType === 'wish'){
       
     } else if (listType === 'discard'){
-      setFixedDate(uid, listId, fixedDate)
+      setDiscardFixedDate(uid, listId, fixedDate)
+    }
+  }
+
+  const handleDeleteFixedDate = () => {
+    if(listType === 'wish'){
+      
+    } else if (listType === 'discard'){
+      deleteDiscardFixedDate(uid, listId)
     }
   }
 
@@ -43,7 +51,8 @@ const ListItemDetail:FC<Props> = ({uid, listType, listId, listName, iconId, edit
         <SelectFixedDate 
           currentDate={fixedDate}
           handleSelectDate={handleSelectDate }
-          updateFixedDate={updateFixedDate}
+          setFixedDate={handleSetFixedDate}
+          deleteFixedDate={handleDeleteFixedDate}
         />
       </div>
     </div>
