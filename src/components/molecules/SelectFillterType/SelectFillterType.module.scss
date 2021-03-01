@@ -1,0 +1,18 @@
+@import '../../../styles/variables';
+
+.types_wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.type_item {
+  font-size: 1.4rem;
+  padding: 10px 10px;
+  color: $unselectedColor;
+  border-radius: 30px;
+}
+
+.type_item_selected {
+  background-color: $keyColorHeavy;
+  color: $baseColorWhite;
+}

@@ -8,6 +8,7 @@ import Footer from '../../organisms/Footer';
 import Header from '../../organisms/Header';
 import FloatingAddButton from '../../atoms/FloatingAddButton';
 import Layout from '../../templates/Layout';
+import SelectFillterType from '../../molecules/SelectFillterType';
 
 const WishLists = () => {
   const { AuthState , setAuthState } = useContext(AuthContext);

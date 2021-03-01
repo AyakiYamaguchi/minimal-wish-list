@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react'
 import Style from './DatePicker.module.scss';
 import { getCalendarDays } from '../../../helper/dateHelper';
-import { date } from 'yup';
 
 type Props = {
   selectedDate?: {
@@ -92,7 +91,6 @@ const DatePicker:FC<Props> = ({selectedDate, handleSelect, isOpen, handleSubmit,
                                 {dateItem}
                               </div>
                             }
-                            
                           </td>
                         )
                       })
