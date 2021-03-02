@@ -5,9 +5,10 @@ import { render, screen } from '@testing-library/react';
 describe('SubmitButton', () => {
   test('renders SubmitBUtton Component', () => {
     const props:SubmitButtonProps ={
-      btnText: 'ボタン表示テスト'
+      btnText: 'SubmitButton'
     }
     render(<SubmitButton btnText={props.btnText} />);
-    screen.debug()
+    // ボタンのラベルに'SubmitButton'が表示されていることを確認
+    expect(screen.getByText('SubmitButton')).toBeInTheDocument();
   })
 })

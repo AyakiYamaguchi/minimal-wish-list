@@ -17,7 +17,7 @@ const LandingPage = () => {
       <div className={Style.top_image_background}>
         <img src={topImage} alt="topImage" className={Style.top_image}/>
       </div>
-      <p className={Style.description}>MinimaListは1IN1OUTの原則でやりたいこと / 欲しい物 リストをつくれるサービスです。</p>
+      <p className={Style.description}>MinimaListは1IN1OUTの原則でやりたいこと・欲しい物リストをつくれるサービスです。</p>
       <div className={Style.btn_wrapper}>
         <Link to="/top">
           <button className={Style.btn}>つかってみる</button>
