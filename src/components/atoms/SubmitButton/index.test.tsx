@@ -1,12 +1,13 @@
 import React from 'react';
-// import { SubmitButton, SubmitButtonProps } from './index';
+import SubmitButton, { SubmitButtonProps } from './index';
+import { render, screen } from '@testing-library/react';
 
-// describe('SubmitButton', () => {
-//   it('確認内容', () => {
-//     const props = {
-//       btnText: 'ボタンテキスト表示テスト'
-//     }
-
-//     const wrapper = mount()
-//   })
-// })
+describe('SubmitButton', () => {
+  test('renders SubmitBUtton Component', () => {
+    const props:SubmitButtonProps ={
+      btnText: 'ボタン表示テスト'
+    }
+    render(<SubmitButton btnText={props.btnText} />);
+    screen.debug()
+  })
+})
