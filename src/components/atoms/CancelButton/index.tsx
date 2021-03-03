@@ -6,6 +6,8 @@ type Props = {
   handleClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>)=> void;
 }
 
+export type CancelButtonProps = Props
+
 const CancelButton:FC<Props> = ({btnText, handleClick}) => {
   return (
     <div>
