@@ -14,7 +14,6 @@ describe('CancelButton', () => {
     const { getByText } = render(
       <CancelButton btnText="キャンセル" handleClick={handleClick}/>
     )
-    screen.debug();
     fireEvent.click(getByText("キャンセル"))
     expect(handleClick).toHaveBeenCalledTimes(1)
   })

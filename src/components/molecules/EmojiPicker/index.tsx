@@ -23,12 +23,12 @@ const EmojiPicker:FC<Props> = ({handleClick, emojiSize, currentEmojiId}) => {
   return (
     <div className={Style.wrapper}>
       { !iconId ? 
-        <div onClick={()=> changeDisplay(!display)} className={Style.select_icon}>
+        <button onClick={()=> changeDisplay(!display)} className={Style.select_icon}>
           <FontAwesomeIcon icon={faSmile} className={Style.icon}/>
           アイコンを選択
-        </div> 
+        </button> 
         :
-        <div onClick={()=> changeDisplay(!display)} className={Style.emoji}>
+        <div onClick={()=> changeDisplay(!display)} className={Style.emoji} data-testid="emoji">
           <Emoji emoji={iconId} size={emojiSize}/>
         </div>
         
