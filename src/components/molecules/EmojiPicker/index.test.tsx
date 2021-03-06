@@ -27,7 +27,7 @@ describe('EmojiPicker', () => {
 
   test('アイコン設定時の表示テスト', () => {
     render(
-      <EmojiPicker 
+      <EmojiPicker
         emojiSize={props.emojiSize} 
         handleClick={props.handleClick}
         currentEmojiId={props.currentEmojiId}
@@ -48,6 +48,22 @@ describe('EmojiPicker', () => {
     )
     fireEvent.click(screen.getByText('アイコンを選択'))
     // Emoji Picker が表示されていることを確認
-    expect(screen.getByRole('aria-label', {name: "Emoji Mart"})).toBeInTheDocument();
+    expect(screen.getByRole("region", { name: 'Emoji Mart™' })).toBeInTheDocument();
+    // 再度アイコン選択をクリックしたときに、Emoji Pickerが非表示になることを確認
+    fireEvent.click(screen.getByText('アイコンを選択'))
+    expect(screen.queryByRole("region", { name: 'Emoji Mart™' })).toBeNull();
+  })
+
+  test('アイコン選択時のクリック処理テスト', () => {
+    const handleClick = jest.fn()
+    render (
+      <EmojiPicker
+        emojiSize={props.emojiSize} 
+        handleClick={handleClick}
+      />
+    )
+    fireEvent.click(screen.getByText('アイコンを選択'))
+    fireEvent.click(screen.getAllByRole('button',{name: '😀, grinning'})[0])
+    expect(handleClick).toHaveBeenCalledTimes(1)
   })
 })
