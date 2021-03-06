@@ -61,35 +61,39 @@ const DatePicker:FC<Props> = ({selectedDate, handleSelect, isOpen, handleSubmit,
         {/* カレンダー表示エリア */}
         <div className={Style.tableWrap}>
           <table className={Style.table}>
-            <tr className={Style.tableHeader}>
-              <th>日</th>
-              <th>月</th>
-              <th>火</th>
-              <th>水</th>
-              <th>木</th>
-              <th>金</th>
-              <th>土</th>
-            </tr>
+            <thead>
+              <tr className={Style.tableHeader}>
+                <th>日</th>
+                <th>月</th>
+                <th>火</th>
+                <th>水</th>
+                <th>木</th>
+                <th>金</th>
+                <th>土</th>
+              </tr>
+            </thead>
+            <tbody>
             {
-              days.map( week => {
+              days.map((week, index) => {
                 return(
-                  <tr>
+                  <tr key={index}>
                     {
-                      week.map( dateItem => {
+                      week.map( (dateItem, index) => {
                         const calendarDate = year + '' + month + dateItem
                         return(
-                          <td className={Style.date_wrapper}>
+                          <td className={Style.date_wrapper} key={index}>
                             { dateItem &&
-                              <div
+                              <p
                                 className={`
                                   ${Style.dateItem} 
                                   ${selectedDateStr === calendarDate && Style.dateItem__selected} 
                                   ${todayStr === calendarDate && Style.dateItem__today}
                                 `} 
                                 onClick={()=> clickDate(dateItem)}
+                                aria-label={calendarDate}
                               >
                                 {dateItem}
-                              </div>
+                              </p>
                             }
                           </td>
                         )
@@ -99,6 +103,7 @@ const DatePicker:FC<Props> = ({selectedDate, handleSelect, isOpen, handleSubmit,
                 )
               })
             }
+            </tbody>
           </table>
         </div>
         <div className={Style.button_wrapper}>
